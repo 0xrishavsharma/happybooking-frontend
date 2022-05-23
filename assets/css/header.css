@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: white;
+}
+.header .headerContainer {
+  width: 100%;
+  max-width: 1024px;
+}
+.header .headerContainer .headerList {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  margin: 0.2rem 0rem 4rem 0rem;
+}
+.header .headerContainer .headerList .headerListItem {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.7rem 0.7rem;
+  border-radius: 20px;
+  cursor: pointer;
+  align-items: center;
+}
+.header .headerContainer .headerList .headerListItem.active {
+  background-color: rgba(255, 255, 255, 0.122);
+  color: white;
+  border: 1px solid white;
+}
+.header .headerContainer .headerContent {
+  margin-bottom: 5rem;
+}
+.header .headerContainer .headerContent h2 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.header .headerContainer .headerContent p {
+  font-size: 1.4rem;
+  width: 80%;
+  margin-bottom: 2rem;
+  margin-top: 0;
+  padding-left: 5px;
+  font-weight: 300;
+}
+.header .headerContainer .headerContent button {
+  font-size: 1.1rem;
+  background-color: var(--secondary-color);
+  border: none;
+  color: white;
+  padding: 0.8rem 1rem;
+  margin-left: 5px;
+  cursor: pointer;
+}
