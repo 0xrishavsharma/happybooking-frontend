@@ -4,7 +4,7 @@ import Header from '../../components/header/Header';
 import Navbar from '../../components/navbar/Navbar';
 import "./home.scss";
 import {cityList} from "./../../featuredHotelList"
-import PropertiesList from '../../components/propertiesList/propertiesList';
+import PropertiesList from '../../components/propertiesList/PropertiesList';
 import FeaturedProperties from '../../components/featuredProperties/featuredProperties';
 import MailList from '../../components/mailList/MailList';
 import Footer from '../../components/footer/Footer';
