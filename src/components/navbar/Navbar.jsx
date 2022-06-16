@@ -1,10 +1,13 @@
 import "./navbar.scss";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <div className="navbar">
         <div className="navContainer">
-            <span className="logo">HappyBooking.com</span>
+            <Link to="/" style={{textDecoration: 'none', color: "white"}}>
+                <span className="logo">HappyBooking.com</span>
+            </Link>
             <div className="navItems">
                 <button className="register">Register</button>
                 <button className="login">Login</button>

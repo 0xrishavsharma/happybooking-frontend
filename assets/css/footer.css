@@ -1,0 +1,35 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1024px;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+}
+
+.footer .footerWrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1024px;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+}
+
+.footer ul {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer ul li {
+  text-decoration: none;
+  list-style: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.footer ul li:hover {
+  color: #bc5b01;
+}

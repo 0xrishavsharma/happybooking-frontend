@@ -1,0 +1,103 @@
+.hotels{
+
+    .hotelsContainer{
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+
+        .hotelsWrapper{
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            width: 100%;
+            max-width: 1024px;
+
+            .hotelSearch{
+                flex: 1;
+                background-color:  #febb02;
+                padding: 1.5rem 1rem;
+                border-radius: 0.2rem;
+                position: sticky;
+
+                h1{
+                    font-size: 1.6rem;
+                    font-weight: bolder;
+                    color: #333333;
+                    margin-bottom: 0.6rem;
+                    margin-top: 0rem;
+                }
+
+                .searchItem{
+
+                    p{
+                        font-size: 0.8rem;
+                        margin-bottom: 0.2rem
+                    }
+
+                    .input{
+                        display: flex;
+                        flex-direction: row;
+                        gap: 0.4rem;
+                        background-color: white;
+                        align-items: center;
+                        padding: 0.5rem 0.8rem;
+                        border-radius: 0.1rem;
+
+
+                        input{
+                            background-color:transparent;
+                            border: none;
+                            outline: none;
+                            font-size: 0.9rem;
+                        }
+                    }
+                    
+                }
+
+                .options{
+                    margin-top: 1rem;
+                }
+
+                .checkbox{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 0.4rem;
+
+                    .icon{
+                        font-size: 0.8rem;
+                    }
+
+                    .checkboxWrapper{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        input{
+                            margin-left: 0rem;
+                        }
+                        span{
+                            font-size: 0.8rem;
+                        }
+                    }
+                }
+
+                .searchBtn{
+                    background-color: var(--secondary-color);
+                    color: white;
+                    border: none;
+                    padding: 0.8rem 1rem;
+                    width: 100%;
+                    margin-top: 1rem;
+                    border-radius: 0.2rem;
+                    font-size: 1rem;
+                    font-weight: 600;
+                }
+            }
+
+            .hotelResult{
+                flex:3;
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.featured{
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1024px;
+    z-index: 1;
+
+    .featuredItem{
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 210px;
+        flex: 1;
+
+        .featuredImg{
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .featuredTitles{
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1rem;
+
+            h1, h2{
+                color: white;
+                text-shadow: -1px 1px 1px rgba(0,0,0,0.6);
+            }
+            h1{
+                font-size:1.8rem;
+                margin: 0;
+            }
+            h2{
+                font-size: 1.4rem;
+                margin: 0;
+            }
+
+
+        }
+    }
+}

@@ -1,0 +1,97 @@
+.hotels .hotelsContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch {
+  flex: 1;
+  background-color: #febb02;
+  padding: 1.5rem 1rem;
+  border-radius: 0.2rem;
+  position: sticky;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch h1 {
+  font-size: 1.6rem;
+  font-weight: bolder;
+  color: #333333;
+  margin-bottom: 0.6rem;
+  margin-top: 0rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .searchItem p {
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .searchItem .input {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  background-color: white;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.1rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .searchItem .input input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .options {
+  margin-top: 1rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .checkbox .icon {
+  font-size: 0.8rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .checkbox .checkboxWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .checkbox .checkboxWrapper input {
+  margin-left: 0rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .checkbox .checkboxWrapper span {
+  font-size: 0.8rem;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelSearch .searchBtn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 0.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.hotels .hotelsContainer .hotelsWrapper .hotelResult {
+  flex: 3;
+}
