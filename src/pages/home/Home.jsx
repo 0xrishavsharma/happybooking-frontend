@@ -5,14 +5,11 @@ import Navbar from '../../components/navbar/Navbar';
 import "./home.scss";
 import {cityList} from "./../../featuredHotelList"
 import PropertiesList from '../../components/propertiesList/PropertiesList';
-import FeaturedProperties from '../../components/featuredProperties/featuredProperties';
+import FeaturedProperties from '../../components/featuredProperties/FeaturedProperties';
 import MailList from '../../components/mailList/MailList';
 import Footer from '../../components/footer/Footer';
 
 const Home = () => {
-
- 
-  
 
   return (
     <div className='home'>
