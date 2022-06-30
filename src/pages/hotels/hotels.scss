@@ -6,7 +6,7 @@
 
         .hotelsWrapper{
             display: flex;
-            gap: 3rem;
+            gap: 1.5rem;
             width: 100%;
             max-width: 1024px;
 
@@ -181,17 +181,22 @@
                 .optionsBar{
                     width: 100%;
                     margin-bottom: 1rem;
+
                     span{
                         color: var(--secondary-color);
                         border: 1px solid var(--secondary-color);
                         padding: 0.5rem 0.5rem;
                         font-size: 14px;
-                        font-weight: 400;
+                        font-weight: 500;
                         transition: 0.1s all cubic-bezier(0.19, 1, 0.22, 1);
                         cursor: pointer;
                         &:hover{
                             background-color: var(--secondary-color-lighter);
                         }
+                    }
+                    span.active{
+                        background-color: var(--secondary-color);
+                        color: white;
                     }
                 }
                 .hotelResults{

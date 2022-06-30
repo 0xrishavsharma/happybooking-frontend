@@ -104,7 +104,7 @@ const Hotels = () => {
               </div>
             </div>
             <div className="optionsBar">
-                <span>Top picks for long stays</span>
+                <span className="active">Top picks for long stays</span>
                 <span>Homes & apartments first</span>
                 <span>Price (lowest first)</span>
                 <span>Best reviewed & lowest price</span>
