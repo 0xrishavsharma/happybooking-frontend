@@ -6,7 +6,6 @@
     position: relative;
 
     .headerContainer{
-        
         width: 100%;
         max-width: 1024px;
 
@@ -117,6 +116,7 @@
                         outline: none;
                         border: none;
                         font-size: 16px;
+                        background-color: transparent;
 
                         &::placeholder{
                             font-size: 16px;

@@ -1,0 +1,103 @@
+.searchResultItem{
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    border: 1px solid rgb(174, 172, 172);
+    border-radius: 5px;
+    padding: 1rem;
+    .first{
+
+    }
+    .second{
+        display: flex;
+        flex: 2;
+        flex-direction: column;
+        gap: 0.4rem;
+        h2{
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+        span{
+            font-size: 0.8rem;
+        }
+        .taxiOp{
+            background-color: #008009;
+            color: white;
+            max-width: max-content;
+            border-radius: 3px;
+            padding: 5px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .details{
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            padding-left: 10px;
+            border-left: 1px solid lightgrey;
+            span{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+                gap: 5px;
+
+            }
+            .cancelOp{
+                color: #008009;
+                font-weight: 700;
+                font-size: 14px;
+            }
+            .cancelLaterOp{
+                color: #008009;
+            }
+            p{
+                margin: 0;
+                font-size: 12px;
+            }
+        }
+    }
+    .third{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        .rating{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+           justify-content: space-between;
+            .left{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+
+                h4{
+                    font-size: 1rem;
+                    margin: 0;
+                }
+                span{
+                    font-size: 12px;
+                    color: rgb(68, 68, 68);
+                }
+            }
+            .right{
+                background-color: var(--primary-color);
+                color: white;
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+                font-weight: 700;
+                border-radius: 5px 5px 5px 0px;
+                padding: 5px;
+            }
+        }
+        span.hotelComfort{
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+        .bottom{
+
+        }
+    }
+}

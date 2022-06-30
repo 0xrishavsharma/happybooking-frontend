@@ -18,6 +18,7 @@
                 position: sticky;
                 top: 10px;
                 height: max-content;
+                width: max-content;
 
                 h1{
                     font-size: 1.6rem;
@@ -28,7 +29,7 @@
                 }
 
                 .searchItem{
-
+                    position: relative;
                     p{
                         font-size: 0.8rem;
                         margin-bottom: 0.2rem
@@ -42,21 +43,71 @@
                         align-items: center;
                         padding: 0.5rem 0.8rem;
                         border-radius: 0.1rem;
+                        cursor: pointer;
 
-
+                        .icon{
+                            font-size: 12px;
+                            color: rgb(49, 49, 49);
+                        }
+                  
                         input{
                             background-color:transparent;
                             border: none;
                             outline: none;
-                            font-size: 0.9rem;
+                            font-size: 14px;
                         }
+                        span{
+                            font-size: 14px;
+                        }
+                    }
+
+                    .date{
+                        position: absolute;
+                        top: 3.5rem;
+                        left: -24%;
+                        z-index: 2;
+                        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                     }
                     
                 }
 
                 .options{
-                    margin-top: 1rem;
+                    margin-top: 0.5rem;
+                    padding: 10px;
+                    background: rgb(255 255 255 / 21%);
+                    border-radius: 5px;
+                
+
+                    p{
+                        margin-top: 0;
+                        margin-bottom: 10px;
+                        font-weight: 500;
+                    }
+
+                    .optionsContainer{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1rem;
+                        .option{
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            font-size: 12px;
+                            span{
+                                align-self: center;
+                                margin: 0;
+                                color: rgb(69, 69, 69);
+                            }
+                            input{
+                                width: 50px;
+                                outline: none;
+                                border: 1px solid rgb(131, 130, 130);
+                                border-radius: 2px;
+                            }
+                        }
+                    }
                 }
+
 
                 .checkbox{
                     display: flex;
@@ -92,6 +143,7 @@
                     border-radius: 0.2rem;
                     font-size: 1rem;
                     font-weight: 600;
+                    cursor: pointer;
                     transition: 0.1s all cubic-bezier(0.455, 0.03, 0.515, 0.955);
                     &:hover{
                         background-color: #003580;
@@ -101,10 +153,16 @@
 
             .hotelResultContainer{
                 flex:3;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
                 .hrHeading{
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    h2{
+                        margin-bottom: 0;
+                    }
                     .mapBtn{
                         display: flex;
                         align-items: center;
@@ -122,13 +180,24 @@
                 }
                 .optionsBar{
                     width: 100%;
+                    margin-bottom: 1rem;
                     span{
                         color: var(--secondary-color);
                         border: 1px solid var(--secondary-color);
-                        padding: 0.2rem 0.5rem;
+                        padding: 0.5rem 0.5rem;
                         font-size: 14px;
+                        font-weight: 400;
+                        transition: 0.1s all cubic-bezier(0.19, 1, 0.22, 1);
+                        cursor: pointer;
+                        &:hover{
+                            background-color: var(--secondary-color-lighter);
+                        }
                     }
-                    
+                }
+                .hotelResults{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
                 }
             }
         }

@@ -11,15 +11,15 @@ import { useNavigate } from "react-router-dom";
 const Header = ({ type }) => {
 
     // Clicking on other parts of document will close the calendar and options popup.
-    // let menuRef = useRef();
-    // useEffect(() => {
-    //     document.addEventListener('mousedown', (event) =>{
-    //       if(!menuRef.current.contains(event.target)){
-    //         setOpenPopCalendar(false),
-    //         setOpenOptions(false)
-    //       }
-    //     })
-    //   })
+    let menuRef = useRef();
+    useEffect(() => {
+        document.addEventListener('mousedown', (event) =>{
+          if(!menuRef.current.contains(event.target)){
+            setOpenPopCalendar(false);
+            setOpenOptions(false);
+          }
+        })
+      })
 
     // Destination selection
     const [destination, setDestination] = useState("");
@@ -55,8 +55,19 @@ const Header = ({ type }) => {
 
     // Navigating to hotels page
     const navigate = useNavigate();
-    const handleSearch = () => {
+    const inputRef = useRef();
+    const handleSearch = (e) => {
         navigate("/hotels", { state: { destination, date, options } })
+        // try{
+        //     if(!inputRef.current.contains()){
+        //         navigate("/hotels", { state: { destination, date, options } })
+        //     }
+        //     else{
+        //         alert("Please fill all inputs to search the hotels!")
+        //     }
+        // }catch(error){
+        //     console.log(error)
+        // }
     }
 
     return (
@@ -95,20 +106,25 @@ const Header = ({ type }) => {
                             <div className="headerSearchItem">
                                 <FontAwesomeIcon icon={faBed} className="icon" />
                                 <input className="headerSearchInput"
+                                    ref={inputRef}
                                     onChange={(e) => setDestination(e.target.value)}
                                     type="text"
                                     placeholder="Where are you going?" />
                             </div>
                             <div className="headerSearchItem">
                                 <FontAwesomeIcon icon={faCalendarDays} className="icon" />
-                                <div /*ref={menuRef}*/>
-                                    <span className="headerSearchText calendarPopInput" onClick={() => setOpenPopCalendar(!openPopCalendar)} >{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}</span>
+                                <div ref={menuRef}>
+                                    <span className="headerSearchText calendarPopInput" ref={inputRef} onClick={() => setOpenPopCalendar(true)}> 
+                                        {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
+                                    </span>
                                     {openPopCalendar &&
                                         <DateRange
                                             editableDateInputs={true}
                                             onChange={item => setDate([item.selection])}
                                             moveRangeOnFirstSelection={false}
                                             ranges={date}
+                                            minDate={new Date()}
+                                            ref={inputRef}
                                             className="datePopCalendar"
                                         />
                                     }
@@ -116,8 +132,8 @@ const Header = ({ type }) => {
                             </div>
                             <div className="headerSearchItem">
                                 <FontAwesomeIcon icon={faPerson} className="icon" />
-                                <div /*ref={menuRef}*/>
-                                    <span className="headerSearchText optionsPopInput" onClick={() => setOpenOptions(!openOptions)} >{` ${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
+                                <div ref={menuRef}>
+                                    <span className="headerSearchText optionsPopInput" onClick={() => setOpenOptions(true)} >{` ${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
                                     {openOptions && <div className="headerOptions" >
                                         <div className="optionItem">
                                             <span className="adult">Adult</span>
