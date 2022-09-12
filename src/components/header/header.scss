@@ -1,25 +1,25 @@
-.header{
+.header {
     display: flex;
     justify-content: center;
     background-color: var(--primary-color);
     color: white;
     position: relative;
 
-    .headerContainer{
+    .headerContainer {
         width: 100%;
         max-width: 1024px;
 
-        .headerList{
+        .headerList {
             display: flex;
             gap: 1.2rem;
             align-items: center;
             margin: 0.2rem 0rem 4rem 0rem;
 
-            &.hotelsMode{
+            &.hotelsMode {
                 margin: 0.2rem 0rem 1.5rem 0rem;
             }
 
-            .headerListItem{
+            .headerListItem {
                 display: flex;
                 gap: 0.4rem;
                 padding: 0.7rem 0.7rem;
@@ -28,26 +28,29 @@
                 align-items: center;
                 border: 1px solid transparent;
 
-                &.active{
+                &.active {
                     background-color: rgba(255, 255, 255, 0.122);
                     color: white;
                     border: 1px solid white;
                 }
-                &:hover{
+
+                &:hover {
                     background-color: rgba(255, 255, 255, 0.122);
                     border: 1px solid rgba(255, 255, 255, 0.122);
                 }
             }
         }
 
-        .headerContent{
+        .headerContent {
             margin-bottom: 5rem;
-            h2{
+
+            h2 {
                 font-size: 3rem;
                 font-weight: 900;
                 margin-bottom: 10px;
             }
-            p{
+
+            p {
                 font-size: 1.4rem;
                 width: 80%;
                 margin-bottom: 2rem;
@@ -55,7 +58,8 @@
                 padding-left: 5px;
                 font-weight: 300;
             }
-            button{
+
+            button {
                 font-size: 1.1rem;
                 background-color: var(--secondary-color);
                 border: none;
@@ -66,45 +70,53 @@
             }
         }
 
-        .headerSearch{
+        .headerSearch {
             display: flex;
-            height: 40px;
+            height: 50px;
             width: 100%;
             max-width: 1024px;
             align-items: center;
             justify-content: space-around;
             color: black;
             position: absolute;
-            bottom: -20px;
+            bottom: -25px;
 
-            .headerSearchContainer{
+            .headerSearchContainer {
                 display: flex;
                 width: 100%;
                 height: 100%;
-                gap: 1rem;
+                // gap: 1rem;
                 border: 4px solid #febb02;
                 border-radius: 4px;
                 background-color: white;
-                padding: 0.5rem 1.5rem;
-                justify-content: space-around;
+                background-color: #febb02;
+                // padding: 0.5rem 1.5rem;
+                // justify-content: space-between;
 
-                .headerSearchItem{
+                .headerSearchItem {
                     display: flex;
                     gap: 0.6rem;
                     align-items: center;
+                    justify-content: center;
                     position: relative;
+                    border-left: 2.3px solid #febb02;
+                    border-right: 2.3px solid #febb02;
+                    width: 100%;
+                    background-color: white;
+                    border-radius: 4px;
 
-                    .openPopCalendar{
+
+                    .openPopCalendar {
                         margin: 0;
                         padding: 0;
                     }
-                    
 
-                    .icon{
+
+                    .icon {
                         color: rgba(128, 128, 128, 0.239);
                     }
 
-                    .datePopCalendar{
+                    .datePopCalendar {
                         position: absolute;
                         top: 50px;
                         left: -100px;
@@ -112,26 +124,25 @@
                         z-index: 2;
                     }
 
-                    .headerSearchInput{
+                    .headerSearchInput {
                         outline: none;
                         border: none;
                         font-size: 16px;
                         background-color: transparent;
 
-                        &::placeholder{
+                        &::placeholder {
                             font-size: 16px;
                         }
                     }
 
-                    .headerSearchText{
+                    .headerSearchText {
                         font-size: 16px;
                         color: lightgrey;
-                        // width: 260px;
 
-                        
+
                     }
 
-                    .headerOptions{
+                    .headerOptions {
                         display: flex;
                         flex-direction: column;
                         gap: 0.4rem;
@@ -143,20 +154,21 @@
                         row-gap: 0.8rem;
                         z-index: 2;
 
-                        .optionItem{
+                        .optionItem {
                             display: flex;
                             align-items: center;
                             width: 250px;
                             justify-content: space-between;
                             gap: 2rem;
+                            padding: 10px;
 
-                            .numbers{
+                            .numbers {
                                 display: flex;
                                 column-gap: 1.5rem;
                                 align-items: center;
-                                
 
-                                .number{
+
+                                .number {
                                     width: 10px;
                                     // padding-right: 10px;
                                 }
@@ -164,36 +176,71 @@
                         }
 
 
-                        button{
+                        button {
                             border: 1px solid var(--secondary-color);
                             color: var(--secondary-color);
                             background-color: white;
-                            // padding: 1px 10px;
+                            height: 100%;
 
-                            &:disabled{
+                            &:disabled {
                                 border: 1px solid lightgrey;
                                 color: lightgrey;
 
-                                &:hover{
+                                &:hover {
                                     background-color: white;
                                     cursor: not-allowed;
                                 }
                             }
 
-                            &:hover{
+                            &:hover {
                                 background-color: var(--secondary-color-lighter);
                             }
                         }
+
+
                     }
 
 
                 }
-                .headerBtn{
-                    padding: 0.7rem 0.9rem;
-                    background-color: var(--secondary-color);
-                    color: white;
-                    border: none;
-                    font-size: 1rem;
+
+                .headerBtnContainer {
+                    .headerBtn {
+                        padding: 5px 032px;
+                        background-color: var(--secondary-color);
+                        color: white;
+                        border: none;
+                        font-size: 1.2rem;
+                        height: 100%;
+                        width: 100%;
+                        border-left: 2.2px solid #febb02;
+                        border-right: 2px solid #febb02;
+                        font-weight: 600;
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1124px) {
+    .header {
+        .headerContainer {
+            .headerList {
+                padding: 1rem 2rem;
+            }
+
+            .headerContent {
+                padding: 0rem 2rem;
+            }
+
+            .headerSearch {
+                .headerSearchContainer {
+                    margin: 0rem 2rem;
+
+                    .headerSearchItem {
+                        padding: 1rem;
+                    }
                 }
             }
         }

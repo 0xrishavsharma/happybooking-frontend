@@ -1,27 +1,27 @@
-.navbar{
+.navbar {
     display: flex;
     justify-content: center;
     height: 60px;
     background-color: var(--primary-color);
     color: white;
 
-    .navContainer{
+    .navContainer {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
         max-width: 1024px;
 
-        .logo{
+        .logo {
             font-weight: 700;
             font-size: 22px;
         }
 
-        .navItems{
+        .navItems {
             display: flex;
             gap: 1rem;
 
-            button{
+            button {
                 border: 1px solid white;
                 border-radius: 4px;
                 padding: 0.4rem 0.5rem;
@@ -30,13 +30,23 @@
                 font-size: 16px;
                 cursor: pointer;
             }
-            .register{
+
+            .register {
                 background-color: white;
                 color: var(--primary-color);
             }
-            .login{
+
+            .login {
                 background-color: rgba(255, 255, 255, 0.166);
             }
+        }
+    }
+}
+
+@media screen and (max-width: 1124px) {
+    .navbar {
+        .navContainer {
+            padding: 1rem 2rem;
         }
     }
 }
