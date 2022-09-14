@@ -13,8 +13,9 @@
         max-width: 1024px;
 
         .logo {
-            font-weight: 700;
+            font-weight: 900;
             font-size: 22px;
+            margin-right: 1rem;
         }
 
         .navItems {
@@ -47,6 +48,26 @@
     .navbar {
         .navContainer {
             padding: 1rem 2rem;
+        }
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .navbar {
+        height: auto;
+
+        .navContainer {
+            padding: 1rem;
+            align-items: unset;
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .navItems {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
         }
     }
 }

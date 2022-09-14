@@ -64,7 +64,7 @@
                 background-color: var(--secondary-color);
                 border: none;
                 color: white;
-                padding: 0.8rem 1rem;
+                padding: 0.8rem 2rem;
                 margin-left: 5px;
                 cursor: pointer;
             }
@@ -228,6 +228,7 @@
         .headerContainer {
             .headerList {
                 padding: 1rem 2rem;
+                flex-wrap: wrap;
             }
 
             .headerContent {
@@ -241,6 +242,107 @@
                     .headerSearchItem {
                         padding: 1rem;
                     }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:963px) {
+    .header {
+        .headerContainer {
+            .headerContent {
+                margin-bottom: 3rem;
+                // h2 {
+                //     font-size: 2.5rem;
+                // }
+
+                p {
+                    padding-left: 0px;
+                }
+
+                button {
+                    margin-left: 0px;
+                }
+            }
+
+            .headerList {
+                margin-bottom: 4rem;
+            }
+
+            .headerSearch {
+                height: auto;
+                position: unset;
+                margin-bottom: -1.8rem;
+
+                .headerSearchContainer {
+                    flex-wrap: wrap;
+                    gap: 4px;
+
+                    .headerBtnContainer {
+                        width: 100%;
+                        height: 50px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:784px) {
+    .header {
+        .headerContainer {
+            .headerContent {
+                h2 {
+                    font-size: 2.5rem;
+                }
+
+                p {
+                    width: 100%;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:440px) {
+    .header {
+        .headerContainer {
+            .headerContent {
+                margin-bottom: 4rem;
+                padding: 0rem 1rem;
+
+                h2 {
+                    font-size: 2.2rem;
+                }
+
+                p {
+                    width: 100%;
+                    font-size: 1.2rem;
+                    padding-left: 0px;
+                    font-size: 1rem;
+                }
+
+                button {
+                    margin-left: 0px;
+                    display: none;
+                }
+            }
+
+            .headerList {
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+                padding: 0rem 1rem;
+
+                .headerListItem {
+                    min-width: max-content;
+                }
+            }
+
+            .headerSearch {
+                .headerSearchContainer {
+                    margin: 0rem 1rem;
                 }
             }
         }
