@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import logo from './logo.svg';
 import './App.scss';
 import {
   BrowserRouter as Router,
@@ -17,7 +16,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/'  element={<Home  />} /> 
+        <Route path='/' element={<Home />} />
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/hotel/:id" element={<Hotel />} />
       </Routes>

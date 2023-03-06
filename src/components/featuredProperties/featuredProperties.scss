@@ -1,66 +1,68 @@
-.fp{
+.fp {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem;
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 0rem;
+  }
+
+  .fpWrapper {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1024px;
-    gap: 1.5rem;
+    flex-direction: row;
+    gap: 2rem;
 
-    h1{
-        font-size: 1.6rem;
-        font-weight: 800;
-        margin-bottom: 0rem;
-    }
+    .fpItem {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
 
-    .fpWrapper{
+      .fpName {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      .fpCity {
+        font-size: 0.9rem;
+        font-weight: 300;
+      }
+      .fpPrice {
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .rating {
         display: flex;
         flex-direction: row;
-        gap: 2rem;
+        align-items: center;
 
-        .fpItem{
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            flex: 1;
-            
-            .fpName{
-                font-size: 1.2rem;
-                font-weight: bold;
-            }
-            .fpCity{
-                font-size: 0.9rem;
-                font-weight: 300;
-            }
-            .fpPrice{
-                font-weight: 500;
-                font-size: 0.9rem;
-            }
-
-            img{
-                width: 100%;
-                height: 200px;
-                object-fit: cover;
-            }
-
-            .rating{
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-
-                button{
-                    background-color: var(--primary-color);
-                    color: white;
-                    font-weight: bold;
-                    font-size: 1rem;
-                    padding: 3px 5px;
-                    border: none;
-                    margin-right: 0.5rem;
-                    border-radius: 4px;
-                }
-
-                span{
-                    font-size: 0.9rem;
-                }
-            }
+        span {
+          font-size: 0.9rem;
         }
+      }
     }
+  }
 }
+
+// .card::-webkit-scrollbar {
+//   height: 0.6rem;
+//   display: hidden;
+//   margin-top: 1rem;
+// }
+// .card::-webkit-scrollbar:hover {
+//   display: block;
+// }
+
+// .card::-webkit-scrollbar-track {
+//   background-color: #b2defd;
+// }
+
+// .card::-webkit-scrollbar-thumb {
+//   background-color: var(--secondary-color);
+//   border-radius: 0.125rem;
+//     border: 1.5px solid #b2defd;
+//   border-inline: none;
+// }

@@ -1,73 +1,73 @@
 .navbar {
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  background-color: var(--primary-color);
+  color: white;
+
+  .navContainer {
     display: flex;
-    justify-content: center;
-    height: 60px;
-    background-color: var(--primary-color);
-    color: white;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1024px;
 
-    .navContainer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 1024px;
-
-        .logo {
-            font-weight: 900;
-            font-size: 22px;
-            margin-right: 1rem;
-        }
-
-        .navItems {
-            display: flex;
-            gap: 1rem;
-
-            button {
-                border: 1px solid white;
-                border-radius: 4px;
-                padding: 0.4rem 0.5rem;
-                color: white;
-                background-color: transparent;
-                font-size: 16px;
-                cursor: pointer;
-            }
-
-            .register {
-                background-color: white;
-                color: var(--primary-color);
-            }
-
-            .login {
-                background-color: rgba(255, 255, 255, 0.166);
-            }
-        }
+    .logo {
+      font-weight: 900;
+      font-size: 22px;
+      margin-right: 1rem;
     }
+
+    .navItems {
+      display: flex;
+      gap: 1rem;
+
+      button {
+        border: 1px solid white;
+        border-radius: 4px;
+        padding: 0.4rem 0.5rem;
+        color: white;
+        background-color: transparent;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .register {
+        background-color: white;
+        color: var(--primary-color);
+      }
+
+      .login {
+        background-color: rgba(255, 255, 255, 0.166);
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1124px) {
-    .navbar {
-        .navContainer {
-            padding: 1rem 2rem;
-        }
+  .navbar {
+    .navContainer {
+      padding: 1rem 2rem;
     }
+  }
 }
 
 @media screen and (max-width: 440px) {
-    .navbar {
-        height: auto;
+  .navbar {
+    height: auto;
 
-        .navContainer {
-            padding: 1rem;
-            align-items: unset;
+    .navContainer {
+      padding: 1rem;
+      align-items: unset;
 
-            .logo {
-                font-size: 20px;
-            }
+      .logo {
+        font-size: 20px;
+      }
 
-            .navItems {
-                flex-wrap: wrap;
-                justify-content: flex-end;
-            }
-        }
+      .navItems {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
     }
+  }
 }

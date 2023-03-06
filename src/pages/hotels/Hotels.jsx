@@ -15,50 +15,51 @@ const Hotels = () => {
 
   const location = useLocation();
 
-  const[destination, setDestination] = useState(location.state.destination);
-  const[date, setDate] = useState(location.state.date);
-  const[openDate, setOpenDate] = useState(false);
-  const[options, setOptions] = useState(location.state.options);
+  const [destination, setDestination] = useState(location.state.destination);
+  const [date, setDate] = useState(location.state.date);
+  console.log("Date data:", date)
+  const [openDate, setOpenDate] = useState(false);
+  const [options, setOptions] = useState(location.state.options);
 
   // Closing the date popup when clicking outside of the popup
   const datePopUpRef = useRef();
-  useEffect(() => {
-    document.addEventListener('mousedown', (event)=>{
-      if(!datePopUpRef.current.contains(event.target)){
-        setOpenDate(false);
-      }
-    })
-  },[])
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', (event) => {
+  //     if (!datePopUpRef.current.contains(event.target)) {
+  //       setOpenDate(false);
+  //     }
+  //   })
+  // }, [])
 
   return (
     <div className="hotels">
       <Navbar />
-      <Header type="hotels"/>
-      <div className="hotelsContainer">
-        <div className="hotelsWrapper">
+      <Header type="hotels" />
+      <div className="flex justify-center hotelsContainer">
+        <div className="hotelsWrapper max-w-[1084px]">
           <div className="hotelSearch">
             <h1 className="title">Search</h1>
             <div className="searchItem">
               <p>Destination/Property Name:</p>
               <div className="input">
-                <FontAwesomeIcon icon={faMagnifyingGlass} className="icon"/>
-                <input type="text" placeholder="Place/Property Name"  />
+                <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
+                <input type="text" placeholder="Place/Property Name" value={destination} onChange={(e) => setDestination(e.target.value)} />
               </div>
             </div>
             <div className="searchItem">
               <p>Check-in to Check-out Date</p>
-              <div className="input" ref={datePopUpRef} onClick={ (e) => setOpenDate(true)}>
+              <div className="input" ref={datePopUpRef} onClick={(e) => setOpenDate(!openDate)}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
                 <span>
-                  {`${format(date[0].startDate, "MM/dd/yyyy")}`} to {`${format( date[0].endDate, "MM/dd/yyyy")}`}
+                  {`${format(date[0].startDate, "dd/MM/yyyy")}`} to {`${format(date[0].endDate, "dd/MM/yyyy")}`}
                 </span>
-                { openDate && (<DateRange
-                    onChange={(item) => setDate([item.selection])}  
-                    minDate={new Date()}
-                    ranges={date}
-                    className="date"
-                    fixedHeight="240"
-                  />)
+                {openDate && (<DateRange
+                  onChange={(item) => setDate([item.selection])}
+                  minDate={new Date()}
+                  ranges={date}
+                  className="date"
+                  fixedHeight="240"
+                />)
                 }
               </div>
             </div>
@@ -75,21 +76,21 @@ const Hotels = () => {
                 </div>
                 <div className="option">
                   <span>Adult</span>
-                  <input type="number" min={1} placeholder={options.adult}/>
+                  <input type="number" min={1} placeholder={options.adult} />
                 </div>
                 <div className="option">
                   <span>Children</span>
-                  <input type="number" min={0} placeholder={options.children}/>
+                  <input type="number" min={0} placeholder={options.children} />
                 </div>
                 <div className="option">
                   <span>Room</span>
-                  <input type="number" min={1} placeholder={options.room}/>
+                  <input type="number" min={1} placeholder={options.room} />
                 </div>
               </div>
             </div>
             <div className="checkbox">
               <div className="checkboxWrapper">
-                <input type="checkbox" name="" id=""/>
+                <input type="checkbox" name="" id="" />
                 <span>I'm traveling for work</span>
               </div>
               <FontAwesomeIcon icon={faCircleQuestion} className="icon" />
@@ -104,13 +105,13 @@ const Hotels = () => {
               </div>
             </div>
             <div className="optionsBar">
-                <span className="active">Top picks for long stays</span>
-                <span>Homes & apartments first</span>
-                <span>Price (lowest first)</span>
-                <span>Best reviewed & lowest price</span>
-                <span>
-                  <FontAwesomeIcon icon={faCircleQuestion} />
-                </span>
+              <span className="active">Top picks for long stays</span>
+              <span>Homes & apartments first</span>
+              <span>Price (lowest first)</span>
+              <span>Best reviewed & lowest price</span>
+              <span>
+                <FontAwesomeIcon icon={faCircleQuestion} />
+              </span>
             </div>
             <div className="hotelResults">
               <SearchResultItem />
@@ -124,7 +125,6 @@ const Hotels = () => {
               <SearchResultItem />
               <SearchResultItem />
             </div>
-            
           </div>
         </div>
       </div>

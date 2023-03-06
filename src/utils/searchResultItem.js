@@ -1,0 +1,40 @@
+export const searchResultItemData = [
+    {
+        id: 1,
+        img: "",
+        name: "",
+        distance: "",
+        airportTaxi: "",
+        type: "",
+        features: "",
+        cancellation: "",
+        cancellationDetails: "",
+        review: "",
+        numberOfReviews: "",
+        rating: "",
+        comfort: "",
+        dayPerson: "",
+        price: "",
+        taxes: "",
+        availability: ""
+    },
+    {
+        id: 2,
+        img: "",
+        name: "",
+        distance: "",
+        airportTaxi: "",
+        type: "",
+        features: "",
+        cancellation: "",
+        cancellationDetails: "",
+        review: "",
+        numberOfReviews: "",
+        rating: "",
+        comfort: "",
+        dayPerson: "",
+        price: "",
+        taxes: "",
+        availability: ""
+    }
+]

@@ -1,9 +1,9 @@
 import React from 'react';
-import Featured from '../../components/featured/Featured';
+import FeaturedLocations from '../../components/featuredLocations/FeaturedLocations';
 import Header from '../../components/header/Header';
 import Navbar from '../../components/navbar/Navbar';
 import "./home.scss";
-import {cityList} from "./../../featuredHotelList"
+import { cityList } from "../../utils/featuredHotelList"
 import PropertiesList from '../../components/propertiesList/PropertiesList';
 import FeaturedProperties from '../../components/featuredProperties/FeaturedProperties';
 import MailList from '../../components/mailList/MailList';
@@ -15,13 +15,14 @@ const Home = () => {
     <div className='home'>
       <Navbar />
       <Header />
-      <div className="homeContainer">
-        <Featured cityList={[cityList[0],cityList[1], cityList[2]]}/>
-        <Featured cityList={[cityList[3],cityList[4], cityList[5]]}/>
-        <PropertiesList className="propertiesList"/>
-        <FeaturedProperties />
-        <MailList />
-        <Footer />
+      <div className="flex justify-center">
+        <div className='flex flex-col items-center gap-8 mt-20 mb-8 max-w-[1084px]'>
+          <FeaturedLocations cityList={cityList} />
+          <PropertiesList className="propertiesList" />
+          <FeaturedProperties />
+          <MailList />
+          <Footer />
+        </div>
       </div>
     </div>
   )
