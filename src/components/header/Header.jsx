@@ -33,36 +33,32 @@ const Header = ({ type }) => {
         },
     );
 
-    // No. of people and room number, increase and decrease
+    //Input refs
+    const locationInputRef = useRef()
+    const dateInputRef = useRef()
+    const adultInputRef = useRef()
+    const childrenInputRef = useRef()
+    const roomInputRef = useRef()
 
 
     // Navigating to hotels page
     const navigate = useNavigate();
     const inputRef = useRef();
     const handleSearch = (e) => {
-        navigate("/hotels", { state: { destination, date, options } })
         try {
-            if (!inputRef.current.contains()) {
-                navigate("/hotels", { state: { destination, date, options } })
+            if (locationInputRef.current.value === ""
+                && locationInputRef.current.value === null && dateInputRef.current.value === ""
+            ) {
+                alert("Please fill all inputs to search the hotels!")
             }
             else {
-                alert("Please fill all inputs to search the hotels!")
+                navigate("/hotels", { state: { destination, date, options } })
+                console.log("Location input ref: " + locationInputRef.current.value)
             }
         } catch (error) {
             console.log(error)
         }
     }
-
-    // Clicking on other parts of document will close the calendar and options popup.
-    let menuRef = useRef();
-    // useEffect(() => {
-    //     document.addEventListener('mousedown', (event) => {
-    //         if (!menuRef.current.contains(event.target)) {
-    //             setOpenPopCalendar(false);
-    //             setOpenOptions(false);
-    //         }
-    //     }, [menuRef.current])
-    // })
 
     const handleOption = (name, logic) => {
         setOptions((prev) => {
@@ -110,7 +106,7 @@ const Header = ({ type }) => {
                                 <div className="headerSearchItem">
                                     <FontAwesomeIcon icon={faBed} className="icon" />
                                     <input className="headerSearchInput"
-                                        ref={inputRef}
+                                        ref={locationInputRef}
                                         onChange={(e) => setDestination(e.target.value)}
                                         type="text"
                                         placeholder="Where are you going?"
@@ -119,7 +115,7 @@ const Header = ({ type }) => {
                                 <div className="headerSearchItem" >
                                     <FontAwesomeIcon icon={faCalendarDays} className="icon" />
                                     <div ref={menuRef} >
-                                        <span className="headerSearchText calendarPopInput" ref={inputRef} onClick={() => setOpenPopCalendar(!openPopCalendar)}>
+                                        <span className="headerSearchText calendarPopInput" ref={dateInputRef} onClick={() => setOpenPopCalendar(!openPopCalendar)}>
                                             {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
                                         </span>
                                         {openPopCalendar &&
@@ -144,7 +140,7 @@ const Header = ({ type }) => {
                                                 <span className="adult">Adult</span>
                                                 <div className="numbers">
                                                     <button disabled={options.adult <= 1} onClick={() => handleOption("adult", "d")} className="decreaseNumber"> - </button>
-                                                    <span className="number"> {`${options.adult}`} </span>
+                                                    <span className="number" ref={adultInputRef}> {`${options.adult}`} </span>
                                                     <button onClick={() => handleOption("adult", "i")} className="increaseNumber">+</button>
                                                 </div>
                                             </div>
@@ -152,7 +148,7 @@ const Header = ({ type }) => {
                                                 <span className="children">Children</span>
                                                 <div className="numbers">
                                                     <button disabled={options.children <= 0} onClick={() => handleOption("children", "d")} className="decreaseNumber"> - </button>
-                                                    <span className="number"> {`${options.children}`}</span>
+                                                    <span className="number" ref={childrenInputRef}> {`${options.children}`}</span>
                                                     <button onClick={() => handleOption("children", "i")} className="increaseNumber">+</button>
                                                 </div>
                                             </div>
@@ -160,7 +156,7 @@ const Header = ({ type }) => {
                                                 <span className="room">Room</span>
                                                 <div className="numbers">
                                                     <button disabled={options.room <= 1} onClick={() => handleOption("room", "d")} className="decreaseNumber"> - </button>
-                                                    <span className="number">  {`${options.room}`}</span>
+                                                    <span className="number" ref={roomInputRef}>  {`${options.room}`}</span>
                                                     <button onClick={() => handleOption("room", "i")} className="increaseNumber">+</button>
                                                 </div>
                                             </div>

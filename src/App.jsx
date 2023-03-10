@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import './App.scss';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   BrowserRouter,
   Routes
 } from "react-router-dom";

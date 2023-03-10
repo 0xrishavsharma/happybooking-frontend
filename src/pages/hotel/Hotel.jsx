@@ -37,36 +37,34 @@ const Hotel = () => {
     },
   ]
 
-  const previousArrowHandler = () => {
-    if (slideNumber >= 0) {
-      setSlideNumber(slideNumber - 1)
-    }
-  }
-  const nextArrowHandler = () => {
-    if (slideNumber <= 5) {
-      setSlideNumber(slideNumber + 1)
-    } else (
-      setSlideNumber(5)
+  const arrowHandler = (direction) => {
+    let newSlideNumber;
+    if (direction === "l") {
+      // console.log("🚀 ~ file: Hotel.jsx:53 ~ arrowHandler ~ slid̵̵eNumber:", slid̵̵eNumber)
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber && slideNumber - 1
+    } else if (direction === "r") (
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber && slideNumber + 1
     )
+    setSlideNumber(newSlideNumber)
   }
   return (
-    <div className="hotel">
+    <div className="">
       <Navbar />
       <Header type="hotels" />
-      <div className="flex justify-center w-full mt-12">
-        <div className="flex flex-col gap-8 relative w-full max-w-[1084px]">
-          {open &&
-            <div className="flex justify-between items-center sticky top-0 left-0 w-screen h-screen z-[99999] bg-[rgba(0,0,0,0.42)]">
-              <FontAwesomeIcon icon={faCircleXmark} className="" onClick={() => setOpen(false)} />
-              <div className="flex items-center justify-center">
-                <FontAwesomeIcon icon={faCircleArrowLeft} onClick={() => setSlideNumber(slideNumber - 1)} />
-                <div className="w-[80%] h-[80vh]">
-                  <img src={photos[slideNumber].img} alt="" />
-                </div>
-                <FontAwesomeIcon icon={faCircleArrowRight} onClick={nextArrowHandler} />
+      <div className={`flex flex-col items-center ${open ? "mt-0" : "mt-12"}`}>
+        {open &&
+          <div className="sticky top-0 left-0 w-screen h-screen z-[999] py-12  max-w-full bg-[rgba(0,0,0,0.42)]">
+            <FontAwesomeIcon icon={faCircleXmark} className="absolute text-4xl text-gray-200 cursor-pointer right-9 top-9" onClick={() => setOpen(false)} />
+            <div className="flex items-center justify-center w-full h-full">
+              <FontAwesomeIcon icon={faCircleArrowLeft} className="pl-8 text-2xl text-gray-200 cursor-pointer" onClick={() => arrowHandler("l")} />
+              <div className="flex justify-center w-full h-[90vh]">
+                <img src={photos[slideNumber].img} className="w-[80%]" alt="" />
               </div>
+              <FontAwesomeIcon icon={faCircleArrowRight} className={`pr-8 text-2xl text-gray-200 cursor-pointer`} onClick={() => arrowHandler("r")} />
             </div>
-          }
+          </div>
+        }
+        <div className="flex flex-col gap-8 relative w-full max-w-[1084px]">
           <div className="">
             <h1 className="text-3xl font-black">Grand Hotel</h1>
             <div className="flex items-center gap-3 my-2 text-xs">
