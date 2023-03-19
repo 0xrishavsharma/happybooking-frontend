@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 const Header = ({ type }) => {
 
+    const menuRef = useRef()
+
     // Destination selection
     const [destination, setDestination] = useState("");
 

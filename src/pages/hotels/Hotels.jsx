@@ -36,8 +36,8 @@ const Hotels = () => {
       <Navbar />
       <Header type="hotels" />
       <div className="flex justify-center hotelsContainer">
-        <div className="hotelsWrapper max-w-[1084px]">
-          <div className="hotelSearch">
+        <div className="hotelsWrapper max-w-[1084px] flex flex-col md:flex-row">
+          <div className="hotelSearch lg:sticky">
             <h1 className="title">Search</h1>
             <div className="searchItem">
               <p>Destination/Property Name:</p>
@@ -89,7 +89,7 @@ const Hotels = () => {
               </div>
             </div>
             <div className="checkbox">
-              <div className="checkboxWrapper">
+              <div className="flex gap-2 checkboxWrapper">
                 <input type="checkbox" name="" id="" />
                 <span>I'm traveling for work</span>
               </div>
@@ -99,7 +99,7 @@ const Hotels = () => {
           </div>
           <div className="hotelResultContainer">
             <div className="hrHeading">
-              <h2>Manali: 372 properties found</h2>
+              <h2>{destination ? destination : "Manali"}: 372 properties found</h2>
               <div className="mapBtn">
                 <button>Show on map</button>
               </div>
