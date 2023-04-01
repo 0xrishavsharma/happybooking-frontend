@@ -12,27 +12,27 @@ const Hotel = () => {
   const [open, setOpen] = useState(false)
   const photos = [
     {
-      id: "1",
+      id: "0",
       img: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
     },
     {
-      id: "2",
+      id: "1",
       img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
     },
     {
-      id: "3",
+      id: "2",
       img: "https://images.unsplash.com/photo-1563911302283-d2bc129e7570?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     },
     {
-      id: "4",
+      id: "3",
       img: "https://images.unsplash.com/photo-1444201983204-c43cbd584d93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
     },
     {
-      id: "5",
+      id: "4",
       img: "https://images.unsplash.com/photo-1541971875076-8f970d573be6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80"
     },
     {
-      id: "6",
+      id: "5",
       img: "https://images.unsplash.com/photo-1521783988139-89397d761dce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1625&q=80"
     },
   ]
@@ -41,9 +41,9 @@ const Hotel = () => {
     let newSlideNumber;
     if (direction === "l") {
       // console.log("🚀 ~ file: Hotel.jsx:53 ~ arrowHandler ~ slid̵̵eNumber:", slid̵̵eNumber)
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber && slideNumber - 1
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1
     } else if (direction === "r") (
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber && slideNumber + 1
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1
     )
     setSlideNumber(newSlideNumber)
   }
@@ -51,7 +51,7 @@ const Hotel = () => {
     <div className="">
       <Navbar />
       <Header type="hotels" />
-      <div className={`flex flex-col items-center ${open ? "mt-0" : "mt-12"}`}>
+      <div className={`flex flex-col items-center select-none ${open ? "mt-0" : "mt-12"}`}>
         {open &&
           <div className="sticky top-0 left-0 w-screen h-screen z-[999] py-12  max-w-full bg-[rgba(0,0,0,0.42)]">
             <FontAwesomeIcon icon={faCircleXmark} className="absolute text-4xl text-gray-200 cursor-pointer right-9 top-9" onClick={() => setOpen(false)} />
@@ -82,8 +82,8 @@ const Hotel = () => {
             {
               photos.map((photo, i) => {
                 return (
-                  <div className="max-h-[280px] min-h-[280px]" onClick={() => { setSlideNumber(i), setOpen(true) }}>
-                    <img src={photo.img} className="object-cover w-full h-full" alt="" srcset="" />
+                  <div key={i + 1} className="max-h-[280px] min-h-[280px]" onClick={() => { setSlideNumber(i), setOpen(true) }}>
+                    <img src={photo.img} className="object-cover w-full h-full" alt="" srcSet="" />
                   </div>
                 )
               })
