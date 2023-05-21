@@ -3,7 +3,7 @@ import "./featuredLocations.scss";
 
 const Featured = ({ cityList }) => {
 	const { data, loading, error } = useFetch(
-		"/api/hotels/countByCity?cities=Dalhousie,Pangi,Chamba,Dharamshala,Kasol,Malana,Manali,Shimla,Lahaul-Spiti,Kaza"
+		"/api/hotels/countByCity?cities=Chamba,Dalhousie,Dharamshala,Kaza,Kasol,Malana,Manali,Pangi,Shimla,Lahaul-Spiti"
 	);
 	return (
 		<div className="flex justify-center w-full max-w-[1084px]">
@@ -29,8 +29,8 @@ const Featured = ({ cityList }) => {
 										className="object-cover w-full h-[180px] col-start-1 col-end-2 row-start-1 row-end-2 aspect-square"
 									/>
 									<div className="mx-2 mt-1 text-white drop-shadow-[-1px_1px_1px_rgba(0,0,0,2)] col-start-1 col-end-2 row-start-1 row-end-2 ">
-										<h1 className="m-0 text-2xl">{city.name}</h1>
-										<h2 className="m-0 text-xl">{city.properties}</h2>
+										<h1 className="m-0 text-2xl font-bold">{city.name}</h1>
+										<h2 className="m-0 text-xl">{data[i]} properties</h2>
 									</div>
 								</div>
 							);
