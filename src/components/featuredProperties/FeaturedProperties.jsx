@@ -3,19 +3,33 @@ import { featuredPropertiesData } from "./../../utils/featuredProperties";
 import useFetch from "../../hooks/useFetch";
 
 const FeaturedProperties = () => {
-	const { data, loading, error } = useFetch("/api/hotels?featured=true");
+	const { data, loading, error } = useFetch(
+		"/api/hotels?featured=true&limit=4"
+	);
 	let sortedData = data?.sort((a, b) => b.rating - a.rating);
+	console.log(sortedData);
 	return (
 		<div className="fp">
 			<h1 className="px-4 title sm:px-8 lg:px-0">Trending properties</h1>
 			<div className="px-4 card fpWrapper sm:px-8 lg:px-0">
-				{featuredPropertiesData.slice(0, 4).map((property, i) => {
+				{featuredPropertiesData?.slice(0, 4).map((property, i) => {
 					const { id, img, hotelName, location, price, rating, review } =
 						property;
 					return (
 						<div className="fpItem" key={id + 1}>
 							<img
-								src={img}
+								// src={
+								// 	sortedData[i]
+								// 		? sortedData[i].photos.length >= 1 &&
+								// 		  sortedData[i].photos[0]
+								// 		: img
+								// }
+
+								src={
+									sortedData[i] && sortedData[i].photos.length >= 1
+										? sortedData[i].photos[0]
+										: img
+								}
 								alt=""
 								className="fpImg w-full h-[200px] object-cover min-w-[184px] "
 							/>
