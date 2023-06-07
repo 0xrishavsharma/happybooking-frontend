@@ -3,23 +3,20 @@ import "./searchResultItem.scss";
 import { Link } from "react-router-dom";
 
 const SearchItem = ({ item }) => {
-	console.log("item", item?.photos?.length > 0);
 	return (
 		<div className="searchResultItem">
 			<div className="first">
 				<img
-					// src={
-					// 	item?.photos?.length > 0
-					// 		? item.photos[0]
-					// 		: "https://cf.bstatic.com/xdata/images/hotel/square200/338187202.webp?k=ac24232b812e6ce84fb3bf46dbf613bcc75a7beb1ae46d2238ea1f515d54a2f7&amp;o=&amp;s=1"
-					// }
-					src="https://cf.bstatic.com/xdata/images/hotel/square200/338187202.webp?k=ac24232b812e6ce84fb3bf46dbf613bcc75a7beb1ae46d2238ea1f515d54a2f7&amp;o=&amp;s=1"
+					src={
+						item?.photos?.length > 0
+							? item.photos[0]
+							: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+					}
+					// src="https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=627&q=80"
 					alt={item ? item.name : "Hotel/Resort/Apartment photo"}
-					width="200"
-					height="200"
 					data-testid="image"
-					class="b8b0793b0e"
-					className="rounded-sm"
+					// class="b8b0793b0e"
+					className="rounded-sm h-[200px] w-[200px] object-cover"
 				/>
 			</div>
 			<div className="second">

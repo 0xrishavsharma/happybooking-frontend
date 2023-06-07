@@ -22,6 +22,8 @@ const Hotels = () => {
 	const [date, setDate] = useState(location.state.date);
 	const [openDate, setOpenDate] = useState(false);
 	const [options, setOptions] = useState(location.state.options);
+	const [minPrice, setMinPrice] = useState();
+	const [maxPrice, setMaxPrice] = useState();
 
 	const formattedDestination =
 		destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
@@ -39,6 +41,14 @@ const Hotels = () => {
 	//   })
 	// }, [])
 
+	const searchButtonHandler = (e) => {
+		e.preventDefault();
+		const hotels = useFetch(
+			`/api/hotels?minPrice=${minPrice}&maxPrice=${maxPrice}`
+		);
+		console.log(hotels);
+	};
+
 	return (
 		<div className="hotels">
 			<Navbar />
@@ -47,8 +57,8 @@ const Hotels = () => {
 				<div className="hotelsWrapper max-w-[1084px] flex flex-col md:flex-row">
 					<div className="hotelSearch lg:sticky">
 						<h1 className="title">Search</h1>
-						<div className="searchItem">
-							<p>Destination/Property Name:</p>
+						<div className="mt-2 searchItem">
+							<p className="text-[0.8rem]">Destination/Property Name:</p>
 							<div className="input">
 								<FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
 								<input
@@ -59,8 +69,8 @@ const Hotels = () => {
 								/>
 							</div>
 						</div>
-						<div className="searchItem">
-							<p>Check-in to Check-out Date</p>
+						<div className="mt-2 searchItem">
+							<p className="text-[0.8rem]">Check-in to Check-out Date</p>
 							<div
 								className="input"
 								ref={datePopUpRef}
@@ -88,13 +98,19 @@ const Hotels = () => {
 									<span>
 										Min price <small>(per night)</small>{" "}
 									</span>
-									<input type="number" />
+									<input
+										type="number"
+										onChange={(e) => setMinPrice(e.target.value)}
+									/>
 								</div>
 								<div className="option">
 									<span>
 										Max price <small>(per night)</small>{" "}
 									</span>
-									<input type="number" />
+									<input
+										type="number"
+										onChange={(e) => setMaxPrice(e.target.value)}
+									/>
 								</div>
 								<div className="option">
 									<span>Adult</span>
@@ -117,7 +133,10 @@ const Hotels = () => {
 							</div>
 							<FontAwesomeIcon icon={faCircleQuestion} className="icon" />
 						</div>
-						<button type="submit" className="searchBtn">
+						<button
+							type="submit"
+							className="searchBtn"
+							onClick={searchButtonHandler}>
 							Search
 						</button>
 					</div>
@@ -141,7 +160,6 @@ const Hotels = () => {
 							</span>
 						</div>
 						<div className="hotelResults">
-							{console.log("Loading: ", loading)}
 							{/* {loading ? (
 								data.map((item, i) => {
 									return (
@@ -151,7 +169,7 @@ const Hotels = () => {
 									);
 								})
 							) : ( */}
-							<div>
+							<div className="flex flex-col gap-4">
 								{data.map((item, i) => (
 									<SearchResultItem item={item} key={i} />
 								))}
