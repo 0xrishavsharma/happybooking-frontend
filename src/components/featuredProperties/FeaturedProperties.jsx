@@ -7,7 +7,7 @@ const FeaturedProperties = () => {
 		"/api/hotels?featured=true&limit=4"
 	);
 	let sortedData = data?.sort((a, b) => b.rating - a.rating);
-	console.log(sortedData);
+
 	return (
 		<div className="fp">
 			<h1 className="px-4 title sm:px-8 lg:px-0">Trending properties</h1>
