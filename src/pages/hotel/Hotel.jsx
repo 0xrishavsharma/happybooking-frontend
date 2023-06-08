@@ -11,10 +11,17 @@ import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
 import "./hotel.scss";
 import { useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import { useLocation } from "react-router-dom";
 
 const Hotel = () => {
 	const [slideNumber, setSlideNumber] = useState(0);
 	const [open, setOpen] = useState(false);
+
+	const hotelId = useLocation().pathname.split("/")[2];
+	console.log(useLocation().pathname.split("/"))
+	const { data, loading, error, reFetch } = useFetch(`hotels/${hotelId}`)
+
 	const photos = [
 		{
 			id: "0",
@@ -56,9 +63,8 @@ const Hotel = () => {
 			<Navbar />
 			<Header type="hotels" />
 			<div
-				className={`flex flex-col items-center select-none ${
-					open ? "mt-0" : "mt-12"
-				}`}>
+				className={`flex flex-col items-center select-none ${open ? "mt-0" : "mt-12"
+					}`}>
 				{open && (
 					<div className="sticky top-0 left-0 w-screen h-screen z-[999] py-12  max-w-full bg-[rgba(0,0,0,0.42)]">
 						<FontAwesomeIcon
@@ -107,25 +113,36 @@ const Hotel = () => {
 							Reserve or Book Now!
 						</button>
 					</div>
-
 					<div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-2">
-						{photos.map((photo, i) => {
-							return (
-								<div
-									key={i + 1}
-									className="max-h-[280px] min-h-[280px] cursor-pointer"
-									onClick={() => {
-										setSlideNumber(i), setOpen(true);
-									}}>
-									<img
-										src={photo.img}
-										className="object-cover w-full h-full"
-										alt=""
-										srcSet=""
-									/>
-								</div>
-							);
-						})}
+						{loading
+							? photos.map((city, i) => {
+								return (
+									<div
+										key={i + 1}
+										className="flex justify-center items-center w-auto min-h-[280px] bg-gray-200 animate-pulse rounded-md shadow-sm">
+										{/* Loading... */}
+									</div>
+								);
+							})
+							:
+							photos.map((photo, i) => {
+								return (
+									<div
+										key={i + 1}
+										className="max-h-[280px] min-h-[280px] cursor-pointer"
+										onClick={() => {
+											setSlideNumber(i), setOpen(true);
+										}}>
+										<img
+											src={photo.img}
+											className="object-cover w-full h-full"
+											alt=""
+											srcSet=""
+										/>
+									</div>
+								);
+							})
+						}
 					</div>
 					<div className="flex justify-center gap-8 p-3">
 						<div className="flex-[3] flex flex-col gap-5">
@@ -164,7 +181,7 @@ const Hotel = () => {
 					<Footer />
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 };
 

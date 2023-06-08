@@ -27,8 +27,8 @@ const Hotels = () => {
 
 	const formattedDestination =
 		destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
-	const { data, error, loading, refetch } = useFetch(
-		`/api/hotels?city=${formattedDestination}`
+	const { data, error, loading, reFetch } = useFetch(
+		`/api/hotels?city=${formattedDestination}&min=${minPrice || 0}&max=${maxPrice || 9999}`
 	);
 
 	// Closing the date popup when clicking outside of the popup
@@ -43,10 +43,7 @@ const Hotels = () => {
 
 	const searchButtonHandler = (e) => {
 		e.preventDefault();
-		const hotels = useFetch(
-			`/api/hotels?minPrice=${minPrice}&maxPrice=${maxPrice}`
-		);
-		console.log(hotels);
+		reFetch()
 	};
 
 	return (
