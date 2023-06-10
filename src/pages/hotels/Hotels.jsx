@@ -32,6 +32,7 @@ const Hotels = () => {
 			maxPrice || 9999
 		}`
 	);
+	console.log("Data: ", data);
 
 	// Closing the date popup when clicking outside of the popup
 	const datePopUpRef = useRef();
@@ -143,7 +144,11 @@ const Hotels = () => {
 						<div className="hrHeading">
 							<h2>
 								{formattedDestination &&
-									`${formattedDestination} : 372 properties found`}
+									`${formattedDestination} : ${data.length} ${
+										data.length > 1 || data.length === 0
+											? "properties"
+											: "property"
+									} found`}
 							</h2>
 							<div className="mapBtn">
 								<button>Show on map</button>

@@ -12,20 +12,24 @@ import Footer from "../../components/footer/Footer";
 import "./hotel.scss";
 import { useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import BookRoom from "../../components/BookRoom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Hotel = () => {
 	const [slideNumber, setSlideNumber] = useState(0);
 	const [open, setOpen] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
+	const navigate = useNavigate();
 
 	const hotelId = useLocation().pathname.split("/")[2];
 	const { data, loading, error, reFetch } = useFetch(
 		`/api/hotels/find/${hotelId}`
 	);
 
+	const { user } = useContext(AuthContext);
 	const { dates, options } = useContext(SearchContext);
-	console.log("Dates: ", dates);
 
 	const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 	function dayDifference(date1, date2) {
@@ -72,6 +76,15 @@ const Hotel = () => {
 			newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
 		setSlideNumber(newSlideNumber);
 	};
+
+	const modalHandler = () => {
+		if (user) {
+			setOpenModal(true);
+		} else {
+			navigate("/login");
+		}
+	};
+
 	return (
 		<div className="">
 			<Navbar />
@@ -126,7 +139,7 @@ const Hotel = () => {
 							</div>
 							<div className="flex flex-col gap-1">
 								<span className="font-medium text-[color:var(--secondary-color)]">
-									{data?.distance}
+									{data?.distance} meters from city center
 								</span>
 								<span className="font-medium text-green-600">
 									Book a stay over ₹{data?.cheapestPrice + 1000} at this
@@ -135,7 +148,8 @@ const Hotel = () => {
 							</div>
 							<button
 								type="button"
-								className="absolute top-0 right-0 py-3 px-6 text-white font-bold rounded-md bg-[var(--secondary-color)]">
+								onClick={modalHandler}
+								className="absolute top-0 right-0 py-3 px-6 text-white font-bold rounded-md bg-[var(--secondary-color)] cursor-pointer">
 								Reserve or Book Now!
 							</button>
 						</div>
@@ -191,12 +205,16 @@ const Hotel = () => {
 										{
 											style: "currency",
 											currency: "INR",
+											minimumFractionDigits: 0,
+											maximumFractionDigits: 0,
 										}
 									)}
 								</b>
 								({days} nights)
 							</h3>
-							<button className="font-bold rounded-md bg-[var(--secondary-color)] px-6 py-3 text-white">
+							<button
+								onClick={modalHandler}
+								className="font-bold rounded-md bg-[var(--secondary-color)] px-6 py-3 text-white">
 								Reserve or Book now
 							</button>
 						</div>
@@ -205,6 +223,13 @@ const Hotel = () => {
 					<Footer />
 				</div>
 			</div>
+			{openModal && (
+				<BookRoom
+					openModal={openModal}
+					setOpenModal={setOpenModal}
+					hotelId={hotelId}
+				/>
+			)}
 		</div>
 	);
 };

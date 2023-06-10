@@ -17,9 +17,11 @@ import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns/esm";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ type }) => {
 	const menuRef = useRef();
+	const { user } = useContext(AuthContext);
 
 	// Destination selection
 	const [destination, setDestination] = useState("");
@@ -115,12 +117,28 @@ const Header = ({ type }) => {
 				{type != "hotels" && (
 					<>
 						<div className="headerContent">
-							<h2>Travel with burning less cash!</h2>
-							<p>
-								Want to get rewarded for traveling? Get an instant discount of
-								10% when you create your account on HappyBooking.com
-							</p>
-							<button className="headerBtn">Register</button>
+							{user ? (
+								<h2>{user.username}, travel with burning less cash!</h2>
+							) : (
+								<h2>Travel with burning less cash!</h2>
+							)}
+							{user ? (
+								<p>
+									Get rewarded for your first booking with us. Get an instant
+									discount of 10% when you apply
+									<i>
+										{" "}
+										<b>{user.username}10</b>{" "}
+									</i>
+									code on your first booking.
+								</p>
+							) : (
+								<p>
+									Want to get rewarded for traveling? Get an instant discount of
+									10% when you create your account on HappyBooking.com
+								</p>
+							)}
+							{!user && <button className="headerBtn">Register</button>}
 						</div>
 						<div className="headerSearch">
 							<div className="headerSearchContainer">
