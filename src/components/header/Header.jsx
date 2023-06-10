@@ -11,11 +11,12 @@ import {
 	faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from "react-date-range";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns/esm";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
 
 const Header = ({ type }) => {
 	const menuRef = useRef();
@@ -25,7 +26,7 @@ const Header = ({ type }) => {
 
 	// Booking dates selection
 	const [openPopCalendar, setOpenPopCalendar] = useState(false);
-	const [date, setDate] = useState([
+	const [dates, setDates] = useState([
 		{
 			startDate: new Date(),
 			endDate: new Date(),
@@ -51,7 +52,12 @@ const Header = ({ type }) => {
 	// Navigating to hotels page
 	const navigate = useNavigate();
 	const inputRef = useRef();
+
+	const { dispatch } = useContext(SearchContext);
+
 	const handleSearch = (e) => {
+		e.preventDefault();
+		dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
 		try {
 			if (
 				locationInputRef.current.value === "" &&
@@ -60,7 +66,7 @@ const Header = ({ type }) => {
 			) {
 				alert("Please fill all inputs to search the hotels!");
 			} else {
-				navigate("/hotels", { state: { destination, date, options } });
+				navigate("/hotels", { state: { destination, dates, options } });
 				console.log("Location input ref: " + locationInputRef.current.value);
 			}
 		} catch (error) {
@@ -135,17 +141,17 @@ const Header = ({ type }) => {
 											className="cursor-pointer select-none headerSearchText calendarPopInput "
 											ref={dateInputRef}
 											onClick={() => setOpenPopCalendar(!openPopCalendar)}>
-											{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(
-												date[0].endDate,
+											{`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(
+												dates[0].endDate,
 												"dd/MM/yyyy"
 											)}`}
 										</span>
 										{openPopCalendar && (
 											<DateRange
 												editableDateInputs={true}
-												onChange={(item) => setDate([item.selection])}
+												onChange={(item) => setDates([item.selection])}
 												moveRangeOnFirstSelection={false}
-												ranges={date}
+												ranges={dates}
 												minDate={new Date()}
 												ref={inputRef}
 												className="datePopCalendar"

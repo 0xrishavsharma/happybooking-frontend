@@ -8,11 +8,13 @@ import {
 import Home from "./pages/home/Home";
 import Hotels from "./pages/hotels/Hotels";
 import Hotel from "./pages/hotel/Hotel";
+import Login from "./components/Login";
 
 function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
+				<Route path="/login" element={<Login />} />
 				<Route path="/" element={<Home />} />
 				<Route path="/hotels" element={<Hotels />} />
 				<Route path="/hotels/:id" element={<Hotel />} />

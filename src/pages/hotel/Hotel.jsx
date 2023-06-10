@@ -10,17 +10,31 @@ import Navbar from "../../components/navbar/Navbar";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
 import "./hotel.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
 
 const Hotel = () => {
 	const [slideNumber, setSlideNumber] = useState(0);
 	const [open, setOpen] = useState(false);
 
 	const hotelId = useLocation().pathname.split("/")[2];
-	console.log(useLocation().pathname.split("/"))
-	const { data, loading, error, reFetch } = useFetch(`hotels/${hotelId}`)
+	const { data, loading, error, reFetch } = useFetch(
+		`/api/hotels/find/${hotelId}`
+	);
+
+	const { dates, options } = useContext(SearchContext);
+	console.log("Dates: ", dates);
+
+	const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
+	function dayDifference(date1, date2) {
+		const timeDiff = Math.abs(date2?.getTime() - date1?.getTime());
+		const diffDays = Math.ceil(timeDiff / MILLISECONDS_IN_DAY);
+		return diffDays;
+	}
+	const days =
+		("Day difference: ", dayDifference(dates[0]?.endDate, dates[0]?.startDate));
 
 	const photos = [
 		{
@@ -63,8 +77,9 @@ const Hotel = () => {
 			<Navbar />
 			<Header type="hotels" />
 			<div
-				className={`flex flex-col items-center select-none ${open ? "mt-0" : "mt-12"
-					}`}>
+				className={`flex flex-col items-center select-none ${
+					open ? "mt-0" : "mt-12"
+				}`}>
 				{open && (
 					<div className="sticky top-0 left-0 w-screen h-screen z-[999] py-12  max-w-full bg-[rgba(0,0,0,0.42)]">
 						<FontAwesomeIcon
@@ -79,7 +94,15 @@ const Hotel = () => {
 								onClick={() => arrowHandler("l")}
 							/>
 							<div className="flex justify-center w-full h-[90vh]">
-								<img src={photos[slideNumber].img} className="w-[80%]" alt="" />
+								<img
+									src={
+										data?.photos?.length > 0
+											? data?.photos[slideNumber]?.img
+											: photos[slideNumber].img
+									}
+									className="w-[80%]"
+									alt=""
+								/>
 							</div>
 							<FontAwesomeIcon
 								icon={faCircleArrowRight}
@@ -90,87 +113,88 @@ const Hotel = () => {
 					</div>
 				)}
 				<div className="flex flex-col gap-8 relative w-full max-w-[1084px]">
-					<div className="">
-						<h1 className="text-3xl font-black">Grand Hotel</h1>
-						<div className="flex items-center gap-3 my-2 text-xs">
-							<FontAwesomeIcon icon={faLocationDot} className="" />
-							<span className="">
-								Grand Hotel, Subhash Street, Shimla, Himachal Pradesh
-							</span>
+					{loading ? (
+						<div className="h-32 bg-gray-200 rounded-md shadow-sm animate-pulse">
+							{/* Loading... */}
 						</div>
-						<div className="flex flex-col gap-1">
-							<span className="font-medium text-[color:var(--secondary-color)]">
-								Valley View - 1.2 KM from bus stand
-							</span>
-							<span className="font-medium text-green-600">
-								Book a stay over ₹5,999 at this property and get a free site
-								seeing taxi
-							</span>
+					) : (
+						<div className="">
+							<h1 className="text-3xl font-black">{data?.name}</h1>
+							<div className="flex items-center gap-3 my-2 text-xs">
+								<FontAwesomeIcon icon={faLocationDot} className="" />
+								<span className="">{data?.address}</span>
+							</div>
+							<div className="flex flex-col gap-1">
+								<span className="font-medium text-[color:var(--secondary-color)]">
+									{data?.distance}
+								</span>
+								<span className="font-medium text-green-600">
+									Book a stay over ₹{data?.cheapestPrice + 1000} at this
+									property and get a free site seeing taxi
+								</span>
+							</div>
+							<button
+								type="button"
+								className="absolute top-0 right-0 py-3 px-6 text-white font-bold rounded-md bg-[var(--secondary-color)]">
+								Reserve or Book Now!
+							</button>
 						</div>
-						<button
-							type="button"
-							className="absolute top-0 right-0 py-3 px-6 text-white font-bold rounded-md bg-[var(--secondary-color)]">
-							Reserve or Book Now!
-						</button>
-					</div>
+					)}
 					<div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-2">
 						{loading
 							? photos.map((city, i) => {
-								return (
-									<div
-										key={i + 1}
-										className="flex justify-center items-center w-auto min-h-[280px] bg-gray-200 animate-pulse rounded-md shadow-sm">
-										{/* Loading... */}
-									</div>
-								);
-							})
-							:
-							photos.map((photo, i) => {
-								return (
-									<div
-										key={i + 1}
-										className="max-h-[280px] min-h-[280px] cursor-pointer"
-										onClick={() => {
-											setSlideNumber(i), setOpen(true);
-										}}>
-										<img
-											src={photo.img}
-											className="object-cover w-full h-full"
-											alt=""
-											srcSet=""
-										/>
-									</div>
-								);
-							})
-						}
+									return (
+										<div
+											key={i + 1}
+											className="flex justify-center items-center w-auto min-h-[280px] bg-gray-200 animate-pulse rounded-md shadow-sm">
+											{/* Loading... */}
+										</div>
+									);
+							  })
+							: (data?.photos?.length > 0 ? data?.photos : photos).map(
+									(photo, i) => {
+										return (
+											<div
+												key={i + 1}
+												className="max-h-[280px] min-h-[280px] cursor-pointer"
+												onClick={() => {
+													setSlideNumber(i), setOpen(true);
+												}}>
+												<img
+													src={photo.img}
+													className="object-cover w-full h-full"
+													alt=""
+													srcSet=""
+												/>
+											</div>
+										);
+									}
+							  )}
 					</div>
 					<div className="flex justify-center gap-8 p-3">
 						<div className="flex-[3] flex flex-col gap-5">
-							<h2 className="text-2xl font-black">
-								Stay in the heart of Himalayas
-							</h2>
-							<p className="text-sm">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-								impedit porro inventore ipsam atque officia cumque corporis ut
-								error, enim repellat deleniti velit ipsa voluptates voluptatum.
-								Unde nulla minima quasi tempore, ad impedit quaerat ipsam iste
-								error eveniet doloremque architecto debitis dolor accusamus
-								necessitatibus, cupiditate exercitationem inventore! Quis eaque
-								esse doloribus, maxime quidem dolorem odit quo, voluptas,
-								mollitia ea officia.
-							</p>
+							<h2 className="text-2xl font-black">{data?.title}</h2>
+							<p className="text-sm">{data?.description}</p>
 						</div>
 						<div className="flex flex-col flex-1 p-6 bg-blue-50">
 							<h2 className="text-xl font-black">
-								Perfect for a 9-night stay!
+								Perfect for a {days}-night stay!
 							</h2>
 							<p className="text-sm">
 								Located in the queen of Mountains.Lorem ipsum dolor sit amet
 								consectetur adipisicing elit.{" "}
 							</p>
 							<h3 className="my-5 text-2xl font-extrabold">
-								{" "}
-								<b>₹49,999</b>(9 nights){" "}
+								<b>
+									{(days * data?.cheapestPrice * options?.room).toLocaleString(
+										"en-IN",
+										{
+											style: "currency",
+											currency: "INR",
+										}
+									)}
+								</b>
+								({days} nights)
 							</h3>
 							<button className="font-bold rounded-md bg-[var(--secondary-color)] px-6 py-3 text-white">
 								Reserve or Book now
@@ -181,7 +205,7 @@ const Hotel = () => {
 					<Footer />
 				</div>
 			</div>
-		</div >
+		</div>
 	);
 };
 

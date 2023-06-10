@@ -13,7 +13,7 @@ const Featured = ({ cityList }) => {
 							return (
 								<div
 									key={i + 1}
-									className="flex justify-center items-center w-auto h-[180px] bg-gray-200 animate-pulse rounded-md shadow-sm">
+									className="flex w-auto h-[180px] bg-gray-200 animate-pulse rounded-md shadow-sm">
 									{/* Loading... */}
 								</div>
 							);
