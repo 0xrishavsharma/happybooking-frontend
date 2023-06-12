@@ -1,6 +1,11 @@
 import React from "react";
+import useFetch from "../hooks/useFetch";
 
 const BookRoom = ({ setOpenModal, hotelId }) => {
+	const { data, loading, error, reFetch } = useFetch(
+		`/api/hotels/room/find/${hotelId}`
+	);
+	console.log("Hotel Data:", data);
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto  bg-[#0d0d0d96] outline-none focus:outline-none">
 			<div className="relative w-auto max-w-3xl mx-auto my-6">
@@ -26,6 +31,22 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 							If you're taught you can’t do anything, you won’t do anything. I
 							was taught I could do everything.
 						</p>
+						{data.map((room) => {
+							return (
+								<div className="flex flex-col gap-1">
+									<div className="flex items-center justify-between">
+										<span className="text-lg font-semibold">{room.name}</span>
+										<span className="text-lg font-semibold">{room.price}</span>
+									</div>
+									<div className="flex items-center justify-between">
+										<span className="text-sm">{room.description}</span>
+										<button className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase outline-none background-transparent focus:outline-none">
+											Book
+										</button>
+									</div>
+								</div>
+							);
+						})}
 					</div>
 					{/*footer*/}
 					<div className="flex items-center justify-end p-6 border-t border-solid rounded-b border-blueGray-200">
