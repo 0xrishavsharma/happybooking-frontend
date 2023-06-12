@@ -12,4 +12,5 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/(?!axios|date-fns/esm)',
   ],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };

@@ -13,6 +13,7 @@ const Featured = ({ cityList }) => {
 							return (
 								<div
 									key={i + 1}
+									data-testid="loading-element"
 									className="flex justify-center items-center w-auto h-[180px] bg-gray-200 animate-pulse rounded-md shadow-sm">
 									{/* Loading... */}
 								</div>
@@ -22,10 +23,12 @@ const Featured = ({ cityList }) => {
 							return (
 								<div
 									className="relative grid object-cover overflow-hidden rounded-md shadow-sm"
-									key={i + 1}>
+									key={i + 1}
+									data-testid="city-element"
+								>
 									<img
 										src={city.img}
-										alt=""
+										alt="city-image"
 										className="object-cover w-full h-[180px] col-start-1 col-end-2 row-start-1 row-end-2 aspect-square"
 									/>
 									<div className="mx-2 mt-1 text-white drop-shadow-[-1px_1px_1px_rgba(0,0,0,2)] col-start-1 col-end-2 row-start-1 row-end-2 ">
