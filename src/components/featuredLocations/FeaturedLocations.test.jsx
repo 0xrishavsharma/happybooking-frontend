@@ -7,6 +7,7 @@ jest.mock('../../hooks/useFetch', () => {
   return {
     __esModule: true,
     default: jest.fn(() => {
+      // This is used to simulate the loading state
       const loading = callCount === 0 ? true : false;
       const data = [1, 2, 3];
       callCount++;

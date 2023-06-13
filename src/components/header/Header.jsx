@@ -84,23 +84,23 @@ const Header = ({ type }) => {
 					className={
 						type === "hotels" ? "headerList hotelsMode" : "headerList"
 					}>
-					<div className="headerListItem active">
+					<div className="headerListItem active" role="heading">
 						<FontAwesomeIcon icon={faBed} />
 						<span>Stays</span>
 					</div>
-					<div className="headerListItem">
+					<div className="headerListItem" role="heading">
 						<FontAwesomeIcon icon={faPlane} />
 						<span>Flights</span>
 					</div>
-					<div className="headerListItem">
+					<div className="headerListItem" role="heading">
 						<FontAwesomeIcon icon={faCar} />
 						<span>Car Rentals</span>
 					</div>
-					<div className="headerListItem">
+					<div className="headerListItem" role="heading">
 						<FontAwesomeIcon icon={faEarthAsia} />
 						<span>Attractions</span>
 					</div>
-					<div className="headerListItem">
+					<div className="headerListItem" role="heading">
 						<FontAwesomeIcon icon={faTaxi} />
 						<span>Airport Taxis</span>
 					</div>
@@ -134,12 +134,14 @@ const Header = ({ type }) => {
 										<span
 											className="cursor-pointer select-none headerSearchText calendarPopInput "
 											ref={dateInputRef}
+											data-testid="dateRangePicker"
 											onClick={() => setOpenPopCalendar(!openPopCalendar)}>
 											{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(
 												date[0].endDate,
 												"dd/MM/yyyy"
 											)}`}
 										</span>
+
 										{openPopCalendar && (
 											<DateRange
 												editableDateInputs={true}
@@ -149,6 +151,7 @@ const Header = ({ type }) => {
 												minDate={new Date()}
 												ref={inputRef}
 												className="datePopCalendar"
+												data-testid="dateRangePicker"
 											/>
 										)}
 									</div>
