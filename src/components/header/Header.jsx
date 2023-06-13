@@ -54,8 +54,8 @@ const Header = ({ type }) => {
 	const handleSearch = (e) => {
 		try {
 			if (
-				locationInputRef.current.value === "" &&
-				locationInputRef.current.value === null &&
+				locationInputRef.current.value === "" ||
+				locationInputRef.current.value === null ||
 				dateInputRef.current.value === ""
 			) {
 				alert("Please fill all inputs to search the hotels!");
