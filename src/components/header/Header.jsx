@@ -160,6 +160,7 @@ const Header = ({ type }) => {
 									<FontAwesomeIcon icon={faPerson} className="icon" />
 									<div ref={menuRef}>
 										<span
+											data-testid="optionsPopInput"
 											className="cursor-pointer select-none headerSearchText optionsPopInput"
 											onClick={() =>
 												setOpenOptions(!openOptions)
@@ -170,6 +171,7 @@ const Header = ({ type }) => {
 													<span className="adult">Adult</span>
 													<div className="numbers">
 														<button
+															data-testid="decreaseAdultButton"
 															disabled={options.adult <= 1}
 															onClick={() => handleOption("adult", "d")}
 															className="decreaseNumber">
@@ -181,6 +183,7 @@ const Header = ({ type }) => {
 															{`${options.adult}`}{" "}
 														</span>
 														<button
+															data-testid="increaseAdultButton"
 															onClick={() => handleOption("adult", "i")}
 															className="increaseNumber">
 															+
@@ -191,6 +194,7 @@ const Header = ({ type }) => {
 													<span className="children">Children</span>
 													<div className="numbers">
 														<button
+															data-testid="decreaseChildrenButton"
 															disabled={options.children <= 0}
 															onClick={() => handleOption("children", "d")}
 															className="decreaseNumber">
@@ -202,6 +206,7 @@ const Header = ({ type }) => {
 															{`${options.children}`}
 														</span>
 														<button
+															data-testid="increaseChildrenButton"
 															onClick={() => handleOption("children", "i")}
 															className="increaseNumber">
 															+
@@ -212,6 +217,7 @@ const Header = ({ type }) => {
 													<span className="room">Room</span>
 													<div className="numbers">
 														<button
+															data-testid="decreaseRoomButton"
 															disabled={options.room <= 1}
 															onClick={() => handleOption("room", "d")}
 															className="decreaseNumber">
@@ -223,6 +229,7 @@ const Header = ({ type }) => {
 															{`${options.room}`}
 														</span>
 														<button
+															data-testid="increaseRoomButton"
 															onClick={() => handleOption("room", "i")}
 															className="increaseNumber">
 															+
@@ -234,7 +241,11 @@ const Header = ({ type }) => {
 									</div>
 								</div>
 								<div className="headerBtnContainer">
-									<button className="headerBtn" onClick={handleSearch}>
+									<button 
+										data-testid="searchButton"
+										className="headerBtn" 
+										onClick={handleSearch}
+									>
 										Search
 									</button>
 								</div>
