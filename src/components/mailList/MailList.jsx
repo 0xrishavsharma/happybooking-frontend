@@ -7,7 +7,7 @@ const MailList = () => {
       <p className="mailSubtitle">Sign up today and we'll keep you updated with the best deals</p>
       <div className="submitEmail">
         <div className="flex items-center justify-center my-4 h-12 gap-1">
-          <input type="text" className="text-black h-full w-72 px-2 rounded-sm" placeholder="Your email" />
+          <input data-testid="emailInput" type="text" className="text-black h-full w-72 px-2 rounded-sm" placeholder="Your email" />
           <button type="button" className="h-full px-8 bg-[color:var(--secondary-color)] rounded-sm">Subscribe</button>
         </div>
         <div className="checkbox">

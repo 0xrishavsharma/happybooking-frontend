@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const SearchItem = ({ item }) => {
 	return (
-		<div className="searchResultItem">
+		<div className="searchResultItem" data-testid='SearchResultItem'>
 			<div className="first">
 				<img
 					src={
@@ -20,8 +20,8 @@ const SearchItem = ({ item }) => {
 				/>
 			</div>
 			<div className="second">
-				<h2>{item?.name}</h2>
-				<span>{item.distance}</span>
+				<h2 data-testid={'name'}>{item?.name}</h2>
+				<span data-testid={'distance'}>{item.distance}</span>
 				<span className="taxiOp">Free airport taxi</span>
 				<div className="details">
 					<span>
@@ -43,17 +43,17 @@ const SearchItem = ({ item }) => {
 								<h4>Good</h4>
 								<span>12 reviews</span>
 							</div>
-							<div className="right">{item.rating}</div>
+							<div data-testid={'rating'} className="right">{item.rating}</div>
 						</>
 					)}
 				</div>
 				<span className="hotelComfort">Comfort 8.2</span>
 				<div className="bottom">
 					<span className="daysPerson">7 nights, 2 adults </span>
-					<h3>₹ {item?.cheapestPrice}</h3>
+					<h3 data-testid={'cheapestPrice'}>₹ {item?.cheapestPrice}</h3>
 					{/* <span className="hotelTaxes">+ ₹1,501 taxes and charges</span> */}
 					<span className="hotelTaxes">Includes taxes and fees</span>
-					<Link to={`/hotels/${item._id}`}>
+					<Link data-testid={'link-to-hotels'} to={`/hotels/${item._id}`}>
 						<button>See availability</button>
 					</Link>
 				</div>

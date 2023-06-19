@@ -11,24 +11,21 @@ import {
 	faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from "react-date-range";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns/esm";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../context/SearchContext";
-import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ type }) => {
 	const menuRef = useRef();
-	const { user } = useContext(AuthContext);
 
 	// Destination selection
 	const [destination, setDestination] = useState("");
 
 	// Booking dates selection
 	const [openPopCalendar, setOpenPopCalendar] = useState(false);
-	const [dates, setDates] = useState([
+	const [date, setDate] = useState([
 		{
 			startDate: new Date(),
 			endDate: new Date(),
@@ -54,21 +51,16 @@ const Header = ({ type }) => {
 	// Navigating to hotels page
 	const navigate = useNavigate();
 	const inputRef = useRef();
-
-	const { dispatch } = useContext(SearchContext);
-
 	const handleSearch = (e) => {
-		e.preventDefault();
-		dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
 		try {
 			if (
-				locationInputRef.current.value === "" &&
-				locationInputRef.current.value === null &&
+				locationInputRef.current.value === "" ||
+				locationInputRef.current.value === null ||
 				dateInputRef.current.value === ""
 			) {
 				alert("Please fill all inputs to search the hotels!");
 			} else {
-				navigate("/hotels", { state: { destination, dates, options } });
+				navigate("/hotels", { state: { destination, date, options } });
 				console.log("Location input ref: " + locationInputRef.current.value);
 			}
 		} catch (error) {
@@ -92,23 +84,23 @@ const Header = ({ type }) => {
 					className={
 						type === "hotels" ? "headerList hotelsMode" : "headerList"
 					}>
-					<div className="headerListItem active">
+					<div className="headerListItem active" role="heading">
 						<FontAwesomeIcon icon={faBed} />
 						<span>Stays</span>
 					</div>
-					<div className="headerListItem">
+					<div className="headerListItem" role="heading">
 						<FontAwesomeIcon icon={faPlane} />
 						<span>Flights</span>
 					</div>
-					<div className="headerListItem">
+					<div className="headerListItem" role="heading">
 						<FontAwesomeIcon icon={faCar} />
 						<span>Car Rentals</span>
 					</div>
-					<div className="headerListItem">
+					<div className="headerListItem" role="heading">
 						<FontAwesomeIcon icon={faEarthAsia} />
 						<span>Attractions</span>
 					</div>
-					<div className="headerListItem">
+					<div className="headerListItem" role="heading">
 						<FontAwesomeIcon icon={faTaxi} />
 						<span>Airport Taxis</span>
 					</div>
@@ -117,28 +109,12 @@ const Header = ({ type }) => {
 				{type != "hotels" && (
 					<>
 						<div className="headerContent">
-							{user ? (
-								<h2>{user.username}, travel with burning less cash!</h2>
-							) : (
-								<h2>Travel with burning less cash!</h2>
-							)}
-							{user ? (
-								<p>
-									Get rewarded for your first booking with us. Get an instant
-									discount of 10% when you apply
-									<i>
-										{" "}
-										<b>{user.username}10</b>{" "}
-									</i>
-									code on your first booking.
-								</p>
-							) : (
-								<p>
-									Want to get rewarded for traveling? Get an instant discount of
-									10% when you create your account on HappyBooking.com
-								</p>
-							)}
-							{!user && <button className="headerBtn">Register</button>}
+							<h2>Travel with burning less cash!</h2>
+							<p>
+								Want to get rewarded for traveling? Get an instant discount of
+								10% when you create your account on HappyBooking.com
+							</p>
+							<button className="headerBtn">Register</button>
 						</div>
 						<div className="headerSearch">
 							<div className="headerSearchContainer">
@@ -158,21 +134,24 @@ const Header = ({ type }) => {
 										<span
 											className="cursor-pointer select-none headerSearchText calendarPopInput "
 											ref={dateInputRef}
+											data-testid="dateRangePicker"
 											onClick={() => setOpenPopCalendar(!openPopCalendar)}>
-											{`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(
-												dates[0].endDate,
+											{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(
+												date[0].endDate,
 												"dd/MM/yyyy"
 											)}`}
 										</span>
+
 										{openPopCalendar && (
 											<DateRange
 												editableDateInputs={true}
-												onChange={(item) => setDates([item.selection])}
+												onChange={(item) => setDate([item.selection])}
 												moveRangeOnFirstSelection={false}
-												ranges={dates}
+												ranges={date}
 												minDate={new Date()}
 												ref={inputRef}
 												className="datePopCalendar"
+												data-testid="dateRangePicker"
 											/>
 										)}
 									</div>
@@ -181,6 +160,7 @@ const Header = ({ type }) => {
 									<FontAwesomeIcon icon={faPerson} className="icon" />
 									<div ref={menuRef}>
 										<span
+											data-testid="optionsPopInput"
 											className="cursor-pointer select-none headerSearchText optionsPopInput"
 											onClick={() =>
 												setOpenOptions(!openOptions)
@@ -191,6 +171,7 @@ const Header = ({ type }) => {
 													<span className="adult">Adult</span>
 													<div className="numbers">
 														<button
+															data-testid="decreaseAdultButton"
 															disabled={options.adult <= 1}
 															onClick={() => handleOption("adult", "d")}
 															className="decreaseNumber">
@@ -202,6 +183,7 @@ const Header = ({ type }) => {
 															{`${options.adult}`}{" "}
 														</span>
 														<button
+															data-testid="increaseAdultButton"
 															onClick={() => handleOption("adult", "i")}
 															className="increaseNumber">
 															+
@@ -212,6 +194,7 @@ const Header = ({ type }) => {
 													<span className="children">Children</span>
 													<div className="numbers">
 														<button
+															data-testid="decreaseChildrenButton"
 															disabled={options.children <= 0}
 															onClick={() => handleOption("children", "d")}
 															className="decreaseNumber">
@@ -223,6 +206,7 @@ const Header = ({ type }) => {
 															{`${options.children}`}
 														</span>
 														<button
+															data-testid="increaseChildrenButton"
 															onClick={() => handleOption("children", "i")}
 															className="increaseNumber">
 															+
@@ -233,6 +217,7 @@ const Header = ({ type }) => {
 													<span className="room">Room</span>
 													<div className="numbers">
 														<button
+															data-testid="decreaseRoomButton"
 															disabled={options.room <= 1}
 															onClick={() => handleOption("room", "d")}
 															className="decreaseNumber">
@@ -244,6 +229,7 @@ const Header = ({ type }) => {
 															{`${options.room}`}
 														</span>
 														<button
+															data-testid="increaseRoomButton"
 															onClick={() => handleOption("room", "i")}
 															className="increaseNumber">
 															+
@@ -255,7 +241,11 @@ const Header = ({ type }) => {
 									</div>
 								</div>
 								<div className="headerBtnContainer">
-									<button className="headerBtn" onClick={handleSearch}>
+									<button 
+										data-testid="searchButton"
+										className="headerBtn" 
+										onClick={handleSearch}
+									>
 										Search
 									</button>
 								</div>
