@@ -162,21 +162,21 @@ const Hotels = () => {
 							</span>
 						</div>
 						<div className="hotelResults">
-							{/* {loading ? (
+							{loading ? (
 								data.map((item, i) => {
 									return (
 										<div
 											key={i + 1}
-											className="flex flex-1 justify-center items-center h-[180px] bg-gray-200 animate-pulse rounded-md shadow-sm"></div>
+											className="w-full p-4 bg-gray-200 rounded-md shadow-sm h-52 animate-pulse"></div>
 									);
 								})
-							) : ( */}
-							<div className="flex flex-col gap-4">
-								{data.map((item, i) => (
-									<SearchResultItem item={item} key={i} />
-								))}
-							</div>
-							{/* )} */}
+							) : (
+								<div className="flex flex-col gap-4">
+									{data.map((item, i) => (
+										<SearchResultItem item={item} key={i} />
+									))}
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
