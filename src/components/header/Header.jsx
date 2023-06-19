@@ -11,21 +11,24 @@ import {
 	faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from "react-date-range";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns/esm";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ type }) => {
 	const menuRef = useRef();
+	const { user } = useContext(AuthContext);
 
 	// Destination selection
 	const [destination, setDestination] = useState("");
 
 	// Booking dates selection
 	const [openPopCalendar, setOpenPopCalendar] = useState(false);
-	const [date, setDate] = useState([
+	const [dates, setDates] = useState([
 		{
 			startDate: new Date(),
 			endDate: new Date(),
@@ -51,7 +54,12 @@ const Header = ({ type }) => {
 	// Navigating to hotels page
 	const navigate = useNavigate();
 	const inputRef = useRef();
+
+	const { dispatch } = useContext(SearchContext);
+
 	const handleSearch = (e) => {
+		e.preventDefault();
+		dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
 		try {
 			if (
 				locationInputRef.current.value === "" ||
@@ -60,7 +68,7 @@ const Header = ({ type }) => {
 			) {
 				alert("Please fill all inputs to search the hotels!");
 			} else {
-				navigate("/hotels", { state: { destination, date, options } });
+				navigate("/hotels", { state: { destination, dates, options } });
 				console.log("Location input ref: " + locationInputRef.current.value);
 			}
 		} catch (error) {
@@ -109,12 +117,28 @@ const Header = ({ type }) => {
 				{type != "hotels" && (
 					<>
 						<div className="headerContent">
-							<h2>Travel with burning less cash!</h2>
-							<p>
-								Want to get rewarded for traveling? Get an instant discount of
-								10% when you create your account on HappyBooking.com
-							</p>
-							<button className="headerBtn">Register</button>
+							{user ? (
+								<h2>{user.username}, travel with burning less cash!</h2>
+							) : (
+								<h2>Travel with burning less cash!</h2>
+							)}
+							{user ? (
+								<p>
+									Get rewarded for your first booking with us. Get an instant
+									discount of 10% when you apply
+									<i>
+										{" "}
+										<b>{user.username}10</b>{" "}
+									</i>
+									code on your first booking.
+								</p>
+							) : (
+								<p>
+									Want to get rewarded for traveling? Get an instant discount of
+									10% when you create your account on HappyBooking.com
+								</p>
+							)}
+							{!user && <button className="headerBtn">Register</button>}
 						</div>
 						<div className="headerSearch">
 							<div className="headerSearchContainer">
@@ -136,8 +160,8 @@ const Header = ({ type }) => {
 											ref={dateInputRef}
 											data-testid="dateRangePicker"
 											onClick={() => setOpenPopCalendar(!openPopCalendar)}>
-											{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(
-												date[0].endDate,
+											{`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(
+												dates[0].endDate,
 												"dd/MM/yyyy"
 											)}`}
 										</span>
@@ -145,9 +169,9 @@ const Header = ({ type }) => {
 										{openPopCalendar && (
 											<DateRange
 												editableDateInputs={true}
-												onChange={(item) => setDate([item.selection])}
+												onChange={(item) => setDates([item.selection])}
 												moveRangeOnFirstSelection={false}
-												ranges={date}
+												ranges={dates}
 												minDate={new Date()}
 												ref={inputRef}
 												className="datePopCalendar"

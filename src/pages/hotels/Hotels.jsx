@@ -19,7 +19,7 @@ const Hotels = () => {
 	const location = useLocation();
 
 	const [destination, setDestination] = useState(location.state.destination);
-	const [date, setDate] = useState(location.state.date);
+	const [dates, setDates] = useState(location.state.dates);
 	const [openDate, setOpenDate] = useState(false);
 	const [options, setOptions] = useState(location.state.options);
 	const [minPrice, setMinPrice] = useState();
@@ -27,9 +27,11 @@ const Hotels = () => {
 
 	const formattedDestination =
 		destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
-	const { data, error, loading, refetch } = useFetch(
-		`/api/hotels?city=${formattedDestination}`
+	const { data, error, loading, reFetch } = useFetch(
+		`/api/hotels?city=${formattedDestination}&min=${minPrice || 0}&max=${maxPrice || 9999
+		}`
 	);
+	console.log("Data: ", data);
 
 	// Closing the date popup when clicking outside of the popup
 	const datePopUpRef = useRef();
@@ -43,10 +45,7 @@ const Hotels = () => {
 
 	const searchButtonHandler = (e) => {
 		e.preventDefault();
-		const hotels = useFetch(
-			`/api/hotels?minPrice=${minPrice}&maxPrice=${maxPrice}`
-		);
-		console.log(hotels);
+		reFetch();
 	};
 
 	return (
@@ -79,19 +78,18 @@ const Hotels = () => {
 								onClick={(e) => setOpenDate(!openDate)}>
 								<FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
 								<span>
-									{`${format(date[0].startDate, "dd/MM/yyyy")}`} to{" "}
-									{`${format(date[0].endDate, "dd/MM/yyyy")}`}
+									{`${format(dates[0].startDate, "dd/MM/yyyy")}`} to{" "}
+									{`${format(dates[0].endDate, "dd/MM/yyyy")}`}
 								</span>
 								{openDate && (
 									<span data-testid={'date'}>
 										<DateRange
-											onChange={(item) => setDate([item.selection])}
-											minDate={new Date()}
-											ranges={date}
-											className="date"
-											// This is expected to be a boolean value not a string
-											fixedHeight={true}
-										/>
+										onChange={(item) => setDates([item.selection])}
+										minDate={new Date()}
+										ranges={dates}
+										className="date"
+										fixedHeight="240"
+									/>
 									</span>
 								)}
 							</div>
@@ -152,7 +150,10 @@ const Hotels = () => {
 						<div className="hrHeading">
 							<h2>
 								{formattedDestination &&
-									`${formattedDestination} : 372 properties found`}
+									`${formattedDestination} : ${data.length} ${data.length > 1 || data.length === 0
+										? "properties"
+										: "property"
+									} found`}
 							</h2>
 							<div className="mapBtn">
 								<button>Show on map</button>
