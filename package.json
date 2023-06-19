@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "jest --coverage --watchAll=false"
+    "test": "jest --coverage --watchAll=false",
+    "clear_jest": "jest --clearCache"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",

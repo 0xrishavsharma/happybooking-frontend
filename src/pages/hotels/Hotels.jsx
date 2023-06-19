@@ -50,7 +50,7 @@ const Hotels = () => {
 	};
 
 	return (
-		<div className="hotels">
+		<div data-testid={'hotels'} className="hotels">
 			<Navbar />
 			<Header type="hotels" />
 			<div className="flex justify-center hotelsContainer">
@@ -62,6 +62,7 @@ const Hotels = () => {
 							<div className="input">
 								<FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
 								<input
+									data-testid="destination"
 									type="text"
 									placeholder="Place/Property Name"
 									value={formattedDestination}
@@ -72,6 +73,7 @@ const Hotels = () => {
 						<div className="mt-2 searchItem">
 							<p className="text-[0.8rem]">Check-in to Check-out Date</p>
 							<div
+								data-testid="openDate"
 								className="input"
 								ref={datePopUpRef}
 								onClick={(e) => setOpenDate(!openDate)}>
@@ -81,17 +83,20 @@ const Hotels = () => {
 									{`${format(date[0].endDate, "dd/MM/yyyy")}`}
 								</span>
 								{openDate && (
-									<DateRange
-										onChange={(item) => setDate([item.selection])}
-										minDate={new Date()}
-										ranges={date}
-										className="date"
-										fixedHeight="240"
-									/>
+									<span data-testid={'date'}>
+										<DateRange
+											onChange={(item) => setDate([item.selection])}
+											minDate={new Date()}
+											ranges={date}
+											className="date"
+											// This is expected to be a boolean value not a string
+											fixedHeight={true}
+										/>
+									</span>
 								)}
 							</div>
 						</div>
-						<div className="searchItem options">
+						<div data-testid={'options'} className="searchItem options">
 							<p>Options</p>
 							<div className="optionsContainer">
 								<div className="option">
@@ -99,6 +104,7 @@ const Hotels = () => {
 										Min price <small>(per night)</small>{" "}
 									</span>
 									<input
+										data-testid={'minPrice'}
 										type="number"
 										onChange={(e) => setMinPrice(e.target.value)}
 									/>
@@ -108,32 +114,34 @@ const Hotels = () => {
 										Max price <small>(per night)</small>{" "}
 									</span>
 									<input
+										data-testid={'maxPrice'}
 										type="number"
 										onChange={(e) => setMaxPrice(e.target.value)}
 									/>
 								</div>
 								<div className="option">
 									<span>Adult</span>
-									<input type="number" min={1} placeholder={options.adult} />
+									<input data-testid={'adult'} type="number" min={1} placeholder={options.adult} />
 								</div>
 								<div className="option">
 									<span>Children</span>
-									<input type="number" min={0} placeholder={options.children} />
+									<input data-testid={'children'} type="number" min={0} placeholder={options.children} />
 								</div>
 								<div className="option">
 									<span>Room</span>
-									<input type="number" min={1} placeholder={options.room} />
+									<input data-testid={'room'} type="number" min={1} placeholder={options.room} />
 								</div>
 							</div>
 						</div>
 						<div className="checkbox">
 							<div className="flex gap-2 checkboxWrapper">
-								<input type="checkbox" name="" id="" />
+								<input data-testid={'checkbox'} type="checkbox" name="" id="" />
 								<span>I'm traveling for work</span>
 							</div>
 							<FontAwesomeIcon icon={faCircleQuestion} className="icon" />
 						</div>
 						<button
+							data-testid={'searchBtn'}
 							type="submit"
 							className="searchBtn"
 							onClick={searchButtonHandler}>

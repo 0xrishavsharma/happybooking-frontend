@@ -51,8 +51,9 @@ const Hotel = () => {
 			newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
 		setSlideNumber(newSlideNumber);
 	};
+	
 	return (
-		<div className="">
+		<div data-testid={'hotel'} className="">
 			<Navbar />
 			<Header type="hotels" />
 			<div
@@ -60,22 +61,25 @@ const Hotel = () => {
 					open ? "mt-0" : "mt-12"
 				}`}>
 				{open && (
-					<div className="sticky top-0 left-0 w-screen h-screen z-[999] py-12  max-w-full bg-[rgba(0,0,0,0.42)]">
+					<div data-testid={'image-slider'} className="sticky top-0 left-0 w-screen h-screen z-[999] py-12  max-w-full bg-[rgba(0,0,0,0.42)]">
 						<FontAwesomeIcon
+							data-testid={'close-button'}
 							icon={faCircleXmark}
 							className="absolute text-4xl text-gray-200 cursor-pointer right-9 top-9"
 							onClick={() => setOpen(false)}
 						/>
 						<div className="flex items-center justify-center w-full h-full">
 							<FontAwesomeIcon
+								data-testid={'left-arrow'}
 								icon={faCircleArrowLeft}
 								className="pl-8 text-2xl text-gray-200 cursor-pointer"
 								onClick={() => arrowHandler("l")}
 							/>
 							<div className="flex justify-center w-full h-[90vh]">
-								<img src={photos[slideNumber].img} className="w-[80%]" alt="" />
+								<img data-testid={'current-image'} src={photos[slideNumber].img} className="w-[80%]" alt="" />
 							</div>
 							<FontAwesomeIcon
+								data-testid={'right-arrow'}
 								icon={faCircleArrowRight}
 								className={`pr-8 text-2xl text-gray-200 cursor-pointer`}
 								onClick={() => arrowHandler("r")}
@@ -112,6 +116,7 @@ const Hotel = () => {
 						{photos.map((photo, i) => {
 							return (
 								<div
+									data-testid={'hotel-image'}
 									key={i + 1}
 									className="max-h-[280px] min-h-[280px] cursor-pointer"
 									onClick={() => {

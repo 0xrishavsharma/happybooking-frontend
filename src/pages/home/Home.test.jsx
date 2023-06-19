@@ -1,4 +1,3 @@
-// src/components/Home/Home.test.jsx
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
@@ -24,6 +23,4 @@ describe('Home component', () => {
     const welcomeMessage = screen.getByText('HappyBooking');
     expect(welcomeMessage).toBeInTheDocument();
   });
-
-  // Add more test cases as needed
 });
