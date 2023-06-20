@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import useFetch from "../hooks/useFetch";
+import { SearchContext } from "../context/SearchContext";
 
 const BookRoom = ({ setOpenModal, hotelId }) => {
 	const [selectedRooms, setSelectedRooms] = React.useState([]);
 	const { data, loading, error, reFetch } = useFetch(
 		`/api/hotels/room/${hotelId}`
 	);
+	const { dates } = useContext(SearchContext);
 
 	const handleRoomInput = (e) => {
 		const checked = e.target.checked;
 		const value = e.target.value;
-		setSelectedRooms(checked ? [...selectedRooms, value] : selectedRooms.filter((room) => room !== value));
+		setSelectedRooms(
+			checked
+				? [...selectedRooms, value]
+				: selectedRooms.filter((room) => room !== value)
+		);
 	};
-	console.log("Selected Rooms:", selectedRooms)
+
+	const handleBookNow = async () => {};
+	console.log("dates", dates);
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto  bg-[#0d0d0d96] outline-none focus:outline-none">
 			<div className="relative w-full max-w-3xl mx-auto my-6">
@@ -44,26 +52,44 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 									<div className="flex flex-col gap-2 p-6 border-2 border-gray-300 rounded-lg shadow-lg outline-none focus:outline-none">
 										<div className="flex justify-between gap-6">
 											<div className="flex flex-col flex-1 ">
-												<span className="text-lg font-semibold">{room.title}</span>
-												<span className="text-xs text-gray-500">{room.description}</span>
+												<span className="text-lg font-semibold">
+													{room.title}
+												</span>
+												<span className="text-xs text-gray-500">
+													{room.description}
+												</span>
 											</div>
-											<span className="flex-1 text-sm text-center">Max people: <span className="font-semibold">{room.maxPeople}</span> </span>
-											<span className="flex-1 font-semibold text-center">₹{room.price}</span>
+											<span className="flex-1 text-sm text-center">
+												Max people:{" "}
+												<span className="font-semibold">{room.maxPeople}</span>{" "}
+											</span>
+											<span className="flex-1 font-semibold text-center">
+												₹{room.price}
+											</span>
 										</div>
 										<div className="">
-											{
-												room.roomNumbers.map((roomNumber) => {
-													return (
-														<div className="flex items-center gap-6" key={roomNumber._id}>
-															<span className="text-lg font-semibold">{roomNumber.number}</span>
-															<input className="text-lg" type="checkbox" value={roomNumber._id} onChange={handleRoomInput} />
-														</div>
-													);
-												})
-											}
+											{room.roomNumbers.map((roomNumber) => {
+												return (
+													<div
+														className="flex items-center gap-6"
+														key={roomNumber._id}>
+														<span className="text-lg font-semibold">
+															{roomNumber.number}
+														</span>
+														<input
+															className="text-lg"
+															type="checkbox"
+															value={roomNumber._id}
+															onChange={handleRoomInput}
+														/>
+													</div>
+												);
+											})}
 										</div>
 										<div className="flex items-center">
-											<button className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-white uppercase outline-none focus:outline-none bg-secondary ">
+											<button
+												onClick={handleBookNow}
+												className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-white uppercase outline-none focus:outline-none bg-secondary ">
 												Book Now
 											</button>
 										</div>

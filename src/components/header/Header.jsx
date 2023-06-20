@@ -85,6 +85,12 @@ const Header = ({ type }) => {
 		});
 	};
 
+	const handleOptionsEnter = (e) => {
+		if (e.key === "Enter") {
+			setOpenOptions(!openOptions);
+		}
+	};
+
 	return (
 		<div className="header">
 			<div className="headerContainer">
@@ -152,10 +158,16 @@ const Header = ({ type }) => {
 										placeholder="Where are you going?"
 									/>
 								</div>
-								<div className="headerSearchItem">
+								<div
+									className="headerSearchItem"
+									tabIndex="0"
+									onKeyDown={(e) =>
+										e.key === "Enter" && setOpenPopCalendar(!openPopCalendar)
+									}>
 									<FontAwesomeIcon icon={faCalendarDays} className="icon" />
 									<div ref={menuRef}>
 										<span
+											tabIndex="auto"
 											className="cursor-pointer select-none headerSearchText calendarPopInput "
 											ref={dateInputRef}
 											onClick={() => setOpenPopCalendar(!openPopCalendar)}>
@@ -177,14 +189,19 @@ const Header = ({ type }) => {
 										)}
 									</div>
 								</div>
-								<div className="headerSearchItem">
+								<div
+									className="headerSearchItem"
+									tabIndex="0"
+									onKeyDown={(e) =>
+										e.key === "Enter" && setOpenOptions(!openOptions)
+									}>
 									<FontAwesomeIcon icon={faPerson} className="icon" />
 									<div ref={menuRef}>
 										<span
 											className="cursor-pointer select-none headerSearchText optionsPopInput"
-											onClick={() =>
-												setOpenOptions(!openOptions)
-											}>{` ${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
+											onClick={() => setOpenOptions(!openOptions)}>
+											{` ${options.adult} adult · ${options.children} children · ${options.room} room`}
+										</span>
 										{openOptions && (
 											<div className="headerOptions">
 												<div className="optionItem">
