@@ -25,12 +25,29 @@ jest.mock('../../hooks/useFetch', () => {
   };
 });
 
+// Custom matcher definition
+expect.extend({
+  toHaveLoadingElements(received) {
+    const loadingElements = received.queryAllByTestId('loading-element');
+    const pass = loadingElements.length > 0;
+    if (pass) {
+      return {
+        message: () => `Expected to not have loading elements, but found ${loadingElements.length}`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () => 'Expected to have loading elements',
+        pass: false,
+      };
+    }
+  },
+});
+
 describe('Featured properties component', () => {
   it('renders loading elements when loading is true', () => {
     render(<FeaturedProperties />);
-
-    const loadingElements = screen.queryAllByTestId('loading-element');
-    expect(loadingElements.length).toBeGreaterThan(0);
+    expect(screen).toHaveLoadingElements();
   });
 
   it('renders property elements when loading is false', () => {

@@ -5,7 +5,7 @@ import useFetch from "./useFetch";
 jest.mock("axios");
 
 describe("useFetch", () => {
-  test("fetches data successfully", async () => {
+  it("fetches data successfully", async () => {
     const responseData = [{ id: 1, name: "John" }];
     axios.get.mockResolvedValueOnce({ data: responseData });
 
@@ -20,7 +20,7 @@ describe("useFetch", () => {
     expect(result.current.data).toEqual(responseData);
   });
 
-  test("handles fetch error", async () => {
+  it("handles fetch error", async () => {
     axios.get.mockRejectedValueOnce(new Error("Fetch error"));
 
     const { result, waitForNextUpdate } = renderHook(() => useFetch("/api/data"));
@@ -34,7 +34,7 @@ describe("useFetch", () => {
     expect(result.current.data).toEqual([]);
   });
 
-  test("reFetch updates data", async () => {
+  it("reFetch updates data", async () => {
     const initialData = [{ id: 1, name: "John" }];
     const updatedData = [{ id: 2, name: "Jane" }];
     axios.get.mockResolvedValueOnce({ data: initialData }).mockResolvedValueOnce({ data: updatedData });
