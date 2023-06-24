@@ -2,12 +2,17 @@ import { createContext, useEffect, useReducer } from "react";
 
 const INITIAL_STATE = {
 	destination: JSON.parse(localStorage.getItem("destination")) || null,
-	dates: localStorage.getItem("dates") || [],
-	options: localStorage.getItem("options") || {
-		adults: undefined,
-		children: undefined,
-		room: undefined,
-	},
+	dates: JSON.parse(localStorage.getItem("dates")) || [],
+	options: JSON.parse(
+		localStorage.getItem("options") || {
+			adults: undefined,
+			children: undefined,
+			room: undefined,
+		}
+	),
+	travelingForWork:
+		JSON.parse(localStorage.getItem("travelingForWork")) || false,
+	priceRange: JSON.parse(localStorage.getItem("priceRange")) || [0, 10000],
 };
 
 export const SearchContext = createContext(INITIAL_STATE);
@@ -30,6 +35,10 @@ export const SearchContextProvider = ({ children }) => {
 		localStorage.setItem("destination", JSON.stringify(state.destination));
 		localStorage.setItem("dates", JSON.stringify(state.dates));
 		localStorage.setItem("options", JSON.stringify(state.options));
+		localStorage.setItem(
+			"travelingForWork",
+			JSON.stringify(state.travelingForWork)
+		);
 	}, [state]);
 
 	return (
@@ -38,6 +47,7 @@ export const SearchContextProvider = ({ children }) => {
 				destination: state.destination,
 				dates: state.dates,
 				options: state.options,
+				travelingForWork: state.travelingForWork,
 				dispatch,
 			}}>
 			{children}

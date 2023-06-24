@@ -21,18 +21,35 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 
 	const handleBookNow = async () => {};
 	console.log("dates", dates);
+	console.log("Start time", dates[0].startDate.getTime());
+	const getDatesInRange = (startDate, endDate) => {
+		const start = new Date(startDate);
+		const end = new Date(endDate);
+		const date = new Date(start.getTime());
+		let list = [];
+
+		while (date <= end) {
+			list.push(new Date(date).getTime());
+			date.setDate(date.getDate() + 1);
+		}
+		return list;
+	};
+	console.log(
+		"List list list:",
+		getDatesInRange(dates[0]?.startDate, dates[0]?.endDate)
+	);
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto  bg-[#0d0d0d96] outline-none focus:outline-none">
 			<div className="relative w-full max-w-3xl mx-auto my-6">
 				{/*content*/}
-				<div className="relative flex flex-col w-full bg-[#f2f2f2] border-0 rounded-lg shadow-lg outline-none focus:outline-none">
+				<div className="relative flex mt-10 flex-col w-full bg-[#f2f2f2] border-0 rounded-lg shadow-lg outline-none focus:outline-none">
 					{/*header*/}
 					<div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-blueGray-200">
-						<h3 className="text-3xl font-semibold">Select rooms</h3>
+						<h3 className="text-3xl font-black">Select rooms</h3>
 						<button
 							className="float-right p-1 ml-auto text-3xl font-semibold leading-none text-black bg-transparent border-0 outline-none focus:outline-none"
 							onClick={() => setOpenModal(false)}>
-							<span className="block w-6 h-6 text-2xl text-black bg-transparent outline-none focus:outline-none">
+							<span className="block w-6 h-6 text-3xl text-black bg-transparent outline-none focus:outline-none">
 								×
 							</span>
 						</button>
@@ -67,21 +84,21 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 												₹{room.price}
 											</span>
 										</div>
-										<div className="">
+										<div className="flex flex-wrap gap-6 ">
 											{room.roomNumbers.map((roomNumber) => {
 												return (
 													<div
-														className="flex items-center gap-6"
+														className="flex items-center gap-2"
 														key={roomNumber._id}>
-														<span className="text-lg font-semibold">
-															{roomNumber.number}
-														</span>
 														<input
 															className="text-lg"
 															type="checkbox"
 															value={roomNumber._id}
 															onChange={handleRoomInput}
 														/>
+														<span className="text-lg font-semibold">
+															{roomNumber.number}
+														</span>
 													</div>
 												);
 											})}
@@ -99,9 +116,9 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 						</div>
 					</div>
 					{/*footer*/}
-					<div className="flex items-center justify-end p-6 border-t border-solid rounded-b border-blueGray-200">
+					<div className="flex items-center justify-end p-2 border-t border-solid rounded-b border-blueGray-200">
 						<button
-							className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase outline-none background-transparent focus:outline-none"
+							className="px-6 py-2 text-sm font-bold text-red-500 uppercase outline-none background-transparent focus:outline-none"
 							type="button"
 							style={{ transition: "all .15s ease" }}
 							onClick={() => setOpenModal(false)}>

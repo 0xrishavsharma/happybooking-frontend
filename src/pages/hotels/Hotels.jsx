@@ -3,8 +3,8 @@ import {
 	faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getDay, format } from "date-fns";
-import { useRef } from "react";
+import { getDay, format, set } from "date-fns";
+import { useContext, useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
@@ -14,6 +14,7 @@ import Navbar from "../../components/navbar/Navbar";
 import SearchResultItem from "../../components/searchResultItem/SearchResultItem";
 import useFetch from "../../hooks/useFetch";
 import "./hotels.scss";
+import { SearchContext } from "../../context/SearchContext";
 
 const Hotels = () => {
 	const location = useLocation();
@@ -22,16 +23,21 @@ const Hotels = () => {
 	const [dates, setDates] = useState(location.state.dates);
 	const [openDate, setOpenDate] = useState(false);
 	const [options, setOptions] = useState(location.state.options);
+	const [travelingForWork, setTravelingForWork] = useState(
+		location.state.travelingForWork
+	);
 	const [minPrice, setMinPrice] = useState();
 	const [maxPrice, setMaxPrice] = useState();
+
+	const { dispatch } = useContext(SearchContext);
 
 	const formattedDestination =
 		destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
 	const { data, error, loading, reFetch } = useFetch(
-		`/api/hotels?city=${formattedDestination}&min=${minPrice || 0}&max=${maxPrice || 9999
+		`/api/hotels?city=${formattedDestination}&min=${minPrice || 0}&max=${
+			maxPrice || 9999
 		}`
 	);
-	console.log("Data: ", data);
 
 	// Closing the date popup when clicking outside of the popup
 	const datePopUpRef = useRef();
@@ -43,8 +49,22 @@ const Hotels = () => {
 	//   })
 	// }, [])
 
+	// const handleOption = (name, logic) => {
+	// 	setOptions((prev) => {
+	// 		return {
+	// 			...prev,
+	// 			[name]: logic === "d" ? prev[name] + 1 : prev[name] - 1,
+	// 		};
+	// 	}
+	// }
+
 	const searchButtonHandler = (e) => {
 		e.preventDefault();
+		dispatch({
+			type: "NEW_SEARCH",
+			payload: { destination, dates, options, travelingForWork },
+		});
+
 		reFetch();
 	};
 
@@ -113,21 +133,55 @@ const Hotels = () => {
 								</div>
 								<div className="option">
 									<span>Adult</span>
-									<input type="number" min={1} placeholder={options.adult} />
+									<input
+										type="number"
+										min={1}
+										placeholder={options.adult}
+										onChange={(e) =>
+											setOptions((prev) => {
+												return { ...prev, adult: e.target.value };
+											})
+										}
+									/>
 								</div>
 								<div className="option">
 									<span>Children</span>
-									<input type="number" min={0} placeholder={options.children} />
+									<input
+										type="number"
+										min={0}
+										placeholder={options.children}
+										onChange={(e) =>
+											setOptions((prev) => {
+												return { ...prev, children: e.target.value };
+											})
+										}
+									/>
 								</div>
 								<div className="option">
 									<span>Room</span>
-									<input type="number" min={1} placeholder={options.room} />
+									<input
+										type="number"
+										min={1}
+										placeholder={options.room}
+										onChange={(e) =>
+											setOptions((prev) => {
+												return { ...prev, room: e.target.value };
+											})
+										}
+									/>
 								</div>
 							</div>
 						</div>
 						<div className="checkbox">
 							<div className="flex gap-2 checkboxWrapper">
-								<input type="checkbox" name="" id="" />
+								<input
+									type="checkbox"
+									name=""
+									id=""
+									// checked={options.travelingForWork}
+									checked={travelingForWork}
+									onChange={(e) => setTravelingForWork(!travelingForWork)}
+								/>
 								<span>I'm traveling for work</span>
 							</div>
 							<FontAwesomeIcon icon={faCircleQuestion} className="icon" />
@@ -143,9 +197,10 @@ const Hotels = () => {
 						<div className="hrHeading">
 							<h2>
 								{formattedDestination &&
-									`${formattedDestination} : ${data.length} ${data.length > 1 || data.length === 0
-										? "properties"
-										: "property"
+									`${formattedDestination} : ${data.length} ${
+										data.length > 1 || data.length === 0
+											? "properties"
+											: "property"
 									} found`}
 							</h2>
 							<div className="mapBtn">
