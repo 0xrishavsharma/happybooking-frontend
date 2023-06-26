@@ -33,7 +33,10 @@ const Hotel = () => {
 
 	const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 	function dayDifference(date1, date2) {
-		const timeDiff = Math.abs(date2?.getTime() - date1?.getTime());
+		const timeDiff = Math.abs(
+			new Date(date2.toString())?.getTime() -
+				new Date(date1.toString())?.getTime()
+		);
 		const diffDays = Math.ceil(timeDiff / MILLISECONDS_IN_DAY);
 		return diffDays;
 	}

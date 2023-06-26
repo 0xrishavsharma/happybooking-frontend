@@ -18,18 +18,23 @@ import { SearchContext } from "../../context/SearchContext";
 
 const Hotels = () => {
 	const location = useLocation();
+	const {
+		destination: contextDestination,
+		dates: contextDates,
+		options: contextOptions,
+		travelingForWork: contextTravelingForWork,
+		dispatch,
+	} = useContext(SearchContext);
 
-	const [destination, setDestination] = useState(location.state.destination);
-	const [dates, setDates] = useState(location.state.dates);
+	const [destination, setDestination] = useState(contextDestination);
+	const [dates, setDates] = useState(contextDates);
 	const [openDate, setOpenDate] = useState(false);
-	const [options, setOptions] = useState(location.state.options);
+	const [options, setOptions] = useState(contextOptions);
 	const [travelingForWork, setTravelingForWork] = useState(
-		location.state.travelingForWork
+		contextTravelingForWork
 	);
 	const [minPrice, setMinPrice] = useState();
 	const [maxPrice, setMaxPrice] = useState();
-
-	const { dispatch } = useContext(SearchContext);
 
 	const formattedDestination =
 		destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
@@ -96,8 +101,15 @@ const Hotels = () => {
 								onClick={(e) => setOpenDate(!openDate)}>
 								<FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
 								<span>
-									{`${format(dates[0].startDate, "dd/MM/yyyy")}`} to{" "}
-									{`${format(dates[0].endDate, "dd/MM/yyyy")}`}
+									{`${format(
+										new Date((dates[0]?.startDate).toString()),
+										"dd/MM/yyyy"
+									)}`}{" "}
+									to{" "}
+									{`${format(
+										new Date((dates[0]?.endDate).toString()),
+										"dd/MM/yyyy"
+									)}`}
 								</span>
 								{openDate && (
 									<DateRange
@@ -136,7 +148,7 @@ const Hotels = () => {
 									<input
 										type="number"
 										min={1}
-										placeholder={options.adult}
+										value={options.adult}
 										onChange={(e) =>
 											setOptions((prev) => {
 												return { ...prev, adult: e.target.value };
@@ -149,7 +161,7 @@ const Hotels = () => {
 									<input
 										type="number"
 										min={0}
-										placeholder={options.children}
+										value={options.children}
 										onChange={(e) =>
 											setOptions((prev) => {
 												return { ...prev, children: e.target.value };
@@ -162,7 +174,7 @@ const Hotels = () => {
 									<input
 										type="number"
 										min={1}
-										placeholder={options.room}
+										value={options.room}
 										onChange={(e) =>
 											setOptions((prev) => {
 												return { ...prev, room: e.target.value };
@@ -216,7 +228,7 @@ const Hotels = () => {
 								<FontAwesomeIcon icon={faCircleQuestion} />
 							</span>
 						</div>
-						<div className="hotelResults">
+						<div className="mb-6 hotelResults">
 							{loading ? (
 								data.map((item, i) => {
 									return (

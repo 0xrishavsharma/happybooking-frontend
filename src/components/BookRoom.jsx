@@ -20,8 +20,9 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 	};
 
 	const handleBookNow = async () => {};
-	console.log("dates", dates);
-	console.log("Start time", dates[0].startDate.getTime());
+
+	// As the dates that we are getting is only start and end date but we need all the dates in between.
+	// So we are creating a function that will return all the dates in between the start and end date.
 	const getDatesInRange = (startDate, endDate) => {
 		const start = new Date(startDate);
 		const end = new Date(endDate);
@@ -34,10 +35,17 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 		}
 		return list;
 	};
-	console.log(
-		"List list list:",
-		getDatesInRange(dates[0]?.startDate, dates[0]?.endDate)
-	);
+	const allDates = getDatesInRange(dates[0]?.startDate, dates[0]?.endDate);
+
+	// We are creating a function that will return the available rooms for the selected dates.
+	// We are getting the available rooms from the backend.
+	const getAvailableRooms = (roomNumber) => {
+		const isFound = roomNumber.unavailableDates.some((date) =>
+			allDates.includes(new Date(date).getTime())
+		);
+		return !isFound;
+	};
+
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto  bg-[#0d0d0d96] outline-none focus:outline-none">
 			<div className="relative w-full max-w-3xl mx-auto my-6">
@@ -64,9 +72,11 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 							was taught I could do everything.
 						</p> */}
 						<div className="flex flex-col gap-4 min-w-[80%]">
-							{data.map((room) => {
+							{data.map((room, i) => {
 								return (
-									<div className="flex flex-col gap-2 p-6 border-2 border-gray-300 rounded-lg shadow-lg outline-none focus:outline-none">
+									<div
+										key={i + 1}
+										className="flex flex-col gap-2 p-6 border-2 border-gray-300 rounded-lg shadow-lg outline-none focus:outline-none">
 										<div className="flex justify-between gap-6">
 											<div className="flex flex-col flex-1 ">
 												<span className="text-lg font-semibold">
@@ -75,11 +85,14 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 												<span className="text-xs text-gray-500">
 													{room.description}
 												</span>
+												<span className="flex-1 text-sm">
+													Max people:{" "}
+													<span className="font-semibold">
+														{room.maxPeople}
+													</span>{" "}
+												</span>
 											</div>
-											<span className="flex-1 text-sm text-center">
-												Max people:{" "}
-												<span className="font-semibold">{room.maxPeople}</span>{" "}
-											</span>
+
 											<span className="flex-1 font-semibold text-center">
 												₹{room.price}
 											</span>
@@ -93,6 +106,7 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 														<input
 															className="text-lg"
 															type="checkbox"
+															disabled={!getAvailableRooms(roomNumber)}
 															value={roomNumber._id}
 															onChange={handleRoomInput}
 														/>
@@ -103,16 +117,16 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 												);
 											})}
 										</div>
-										<div className="flex items-center">
-											<button
-												onClick={handleBookNow}
-												className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-white uppercase outline-none focus:outline-none bg-secondary ">
-												Book Now
-											</button>
-										</div>
 									</div>
 								);
 							})}
+							<div className="flex items-center">
+								<button
+									onClick={handleBookNow}
+									className="px-8 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase outline-none focus:outline-none bg-secondary ">
+									Book Now
+								</button>
+							</div>
 						</div>
 					</div>
 					{/*footer*/}
