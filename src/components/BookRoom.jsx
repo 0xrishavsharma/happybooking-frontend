@@ -19,8 +19,6 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 		);
 	};
 
-	const handleBookNow = async () => {};
-
 	// As the dates that we are getting is only start and end date but we need all the dates in between.
 	// So we are creating a function that will return all the dates in between the start and end date.
 	const getDatesInRange = (startDate, endDate) => {
@@ -44,6 +42,18 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 			allDates.includes(new Date(date).getTime())
 		);
 		return !isFound;
+	};
+
+	const handleBookNow = async () => {
+		try {
+			await Promise.all(
+				selectedRooms.map(async (room) => {
+					await axios.post(`/api/rooms/availability/${room}`);
+				})
+			);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
