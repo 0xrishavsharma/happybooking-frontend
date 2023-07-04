@@ -8,7 +8,7 @@ import {
 import Home from "./pages/home/Home";
 import Hotels from "./pages/hotels/Hotels";
 import Hotel from "./pages/hotel/Hotel";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 
 function App() {
 	return (

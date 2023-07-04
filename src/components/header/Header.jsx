@@ -293,7 +293,7 @@ const Header = ({ type }) => {
 			</div>
 			{type !== "hotels" && (
 				<div className="flex items-center justify-center gap-2 mt-10 ">
-					<div className="w-full max-w-[1084px] flex items-center gap-2 ">
+					<div className="w-full max-w-[1084px] flex items-center gap-2 max-[1124px]:px-8 ">
 						<input
 							type="checkbox"
 							// checked={travelingForWork}

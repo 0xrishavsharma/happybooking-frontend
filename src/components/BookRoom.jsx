@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { SearchContext } from "../context/SearchContext";
+import axios from "axios";
 
 const BookRoom = ({ setOpenModal, hotelId }) => {
-	const [selectedRooms, setSelectedRooms] = React.useState([]);
+	const [selectedRooms, setSelectedRooms] = useState([]);
 	const { data, loading, error, reFetch } = useFetch(
 		`/api/hotels/room/${hotelId}`
 	);
@@ -18,6 +19,7 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 				: selectedRooms.filter((room) => room !== value)
 		);
 	};
+	console.log("Selected rooms: " + selectedRooms);
 
 	// As the dates that we are getting is only start and end date but we need all the dates in between.
 	// So we are creating a function that will return all the dates in between the start and end date.
@@ -47,9 +49,13 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 	const handleBookNow = async () => {
 		try {
 			await Promise.all(
-				selectedRooms.map(async (room) => {
-					await axios.post(`/api/rooms/availability/${room}`);
-				})
+				selectedRooms.map(async (roomId) => {
+					const res = await axios.put(`/api/rooms/availability/${roomId}`, {
+						dates: allDates,
+					});
+					return res.data;
+				}
+				)
 			);
 		} catch (err) {
 			console.log(err);

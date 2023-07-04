@@ -1,344 +1,346 @@
 .header {
-  display: flex;
-  justify-content: center;
-  background-color: var(--primary-color);
-  color: white;
-  position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+    position: relative;
 
-  .headerContainer {
-    width: 100%;
-    max-width: 1084px;
-
-    .headerList {
-      display: flex;
-      gap: 1.2rem;
-      align-items: center;
-      margin: 0.2rem 0rem 4rem 0rem;
-
-      &.hotelsMode {
-        margin: 0.2rem 0rem 1.5rem 0rem;
-      }
-
-      .headerListItem {
-        display: flex;
-        gap: 0.4rem;
-        padding: 0.5rem 0.7rem;
-        border-radius: 20px;
-        cursor: pointer;
-        align-items: center;
-        border: 1px solid transparent;
-
-        &.active {
-          background-color: rgba(255, 255, 255, 0.122);
-          color: white;
-          border: 1px solid white;
-        }
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.122);
-          border: 1px solid rgba(255, 255, 255, 0.122);
-        }
-      }
-    }
-
-    .headerContent {
-      margin-bottom: 5rem;
-
-      h2 {
-        font-size: 3rem;
-        font-weight: 900;
-        margin-bottom: 10px;
-      }
-
-      p {
-        font-size: 1.4rem;
-        width: 80%;
-        margin-bottom: 2rem;
-        margin-top: 0;
-        padding-left: 5px;
-        font-weight: 300;
-      }
-
-      button {
-        font-size: 1.1rem;
-        background-color: var(--secondary-color);
-        border: none;
-        color: white;
-        padding: 0.8rem 2rem;
-        margin-left: 5px;
-        cursor: pointer;
-      }
-    }
-
-    .headerSearch {
-      display: flex;
-      height: 50px;
-      width: 100%;
-      max-width: 1024px;
-      align-items: center;
-      justify-content: space-around;
-      color: black;
-      position: absolute;
-      bottom: -25px;
-
-      .headerSearchContainer {
-        display: flex;
+    .headerContainer {
         width: 100%;
-        height: 100%;
-        // gap: 1rem;
-        border: 4px solid #febb02;
-        border-radius: 4px;
-        background-color: white;
-        background-color: #febb02;
-        // padding: 0.5rem 1.5rem;
-        // justify-content: space-between;
+        max-width: 1084px;
 
-        .headerSearchItem {
-          display: flex;
-          gap: 0.6rem;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          border-left: 2.3px solid #febb02;
-          border-right: 2.3px solid #febb02;
-          width: 100%;
-          background-color: white;
-          border-radius: 4px;
-
-          .openPopCalendar {
-            margin: 0;
-            padding: 0;
-          }
-
-          .icon {
-            color: rgba(128, 128, 128, 0.239);
-          }
-
-          .datePopCalendar {
-            position: absolute;
-            top: 50px;
-            // left: -50px;
-            left: 0;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            z-index: 2;
-            overflow: visible;
-          }
-
-          .headerSearchInput {
-            outline: none;
-            border: none;
-            font-size: 16px;
-            background-color: transparent;
-
-            &::placeholder {
-              font-size: 16px;
-            }
-          }
-
-          .headerSearchText {
-            font-size: 16px;
-            color: lightgrey;
-          }
-
-          .headerOptions {
+        .headerList {
             display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            position: absolute;
-            top: 50px;
-            left: 0;
-            right: 0;
-            background-color: white;
-            padding: 1.5rem 2rem;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            row-gap: 0.8rem;
-            z-index: 2;
+            gap: 1.2rem;
+            align-items: center;
+            margin: 0.2rem 0rem 4rem 0rem;
 
-            .optionItem {
-              display: flex;
-              align-items: center;
-              width: 250px;
-              justify-content: space-between;
-              gap: 2rem;
-              padding: 10px;
+            &.hotelsMode {
+                margin: 0.2rem 0rem 1.5rem 0rem;
+            }
 
-              .numbers {
+            .headerListItem {
                 display: flex;
-                column-gap: 1.5rem;
+                gap: 0.4rem;
+                padding: 0.5rem 0.7rem;
+                border-radius: 20px;
+                cursor: pointer;
                 align-items: center;
+                border: 1px solid transparent;
 
-                .number {
-                  width: 10px;
-                  // padding-right: 10px;
+                &.active {
+                    background-color: rgba(255, 255, 255, 0.122);
+                    color: white;
+                    border: 1px solid white;
                 }
-              }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.122);
+                    border: 1px solid rgba(255, 255, 255, 0.122);
+                }
+            }
+        }
+
+        .headerContent {
+            margin-bottom: 5rem;
+
+            h2 {
+                font-size: 3rem;
+                font-weight: 900;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 1.4rem;
+                width: 80%;
+                margin-bottom: 2rem;
+                margin-top: 0;
+                padding-left: 5px;
+                font-weight: 300;
             }
 
             button {
-              border: 1px solid var(--secondary-color);
-              color: var(--secondary-color);
-              background-color: white;
-              height: 100%;
-              width: 1.5rem;
-
-              &:disabled {
-                border: 1px solid lightgrey;
-                color: lightgrey;
-
-                &:hover {
-                  background-color: white;
-                  cursor: not-allowed;
-                }
-              }
-
-              &:hover {
-                background-color: var(--secondary-color-lighter);
-              }
+                font-size: 1.1rem;
+                background-color: var(--secondary-color);
+                border: none;
+                color: white;
+                padding: 0.8rem 2rem;
+                margin-left: 5px;
+                cursor: pointer;
             }
-          }
         }
 
-        .headerBtnContainer {
-          .headerBtn {
-            padding: 5px 032px;
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            font-size: 1.2rem;
-            height: 100%;
+        .headerSearch {
+            display: flex;
+            height: 50px;
             width: 100%;
-            border-left: 2.2px solid #febb02;
-            border-right: 2px solid #febb02;
-            font-weight: 600;
-          }
+            max-width: 1084px;
+            align-items: center;
+            justify-content: space-around;
+            color: black;
+            position: absolute;
+            bottom: -25px;
+
+            .headerSearchContainer {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                // gap: 1rem;
+                border: 4px solid #febb02;
+                border-radius: 4px;
+                background-color: white;
+                background-color: #febb02;
+                // padding: 0.5rem 1.5rem;
+                // justify-content: space-between;
+
+                .headerSearchItem {
+                    display: flex;
+                    gap: 0.6rem;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    border-left: 2.3px solid #febb02;
+                    border-right: 2.3px solid #febb02;
+                    width: 100%;
+                    background-color: white;
+                    border-radius: 4px;
+
+                    .openPopCalendar {
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .icon {
+                        color: rgba(128, 128, 128, 0.239);
+                    }
+
+                    .datePopCalendar {
+                        position: absolute;
+                        top: 50px;
+                        // left: -50px;
+                        left: 0;
+                        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                        z-index: 2;
+                        overflow: visible;
+                    }
+
+                    .headerSearchInput {
+                        outline: none;
+                        border: none;
+                        font-size: 16px;
+                        background-color: transparent;
+
+                        &::placeholder {
+                            font-size: 16px;
+                        }
+                    }
+
+                    .headerSearchText {
+                        font-size: 16px;
+                        color: lightgrey;
+                    }
+
+                    .headerOptions {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.4rem;
+                        position: absolute;
+                        top: 50px;
+                        left: 0;
+                        right: 0;
+                        background-color: white;
+                        padding: 1.5rem 2rem;
+                        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                        row-gap: 0.8rem;
+                        z-index: 2;
+
+                        .optionItem {
+                            display: flex;
+                            align-items: center;
+                            width: 250px;
+                            justify-content: space-between;
+                            gap: 2rem;
+                            padding: 10px;
+
+                            .numbers {
+                                display: flex;
+                                column-gap: 1.5rem;
+                                align-items: center;
+
+                                .number {
+                                    width: 10px;
+                                    // padding-right: 10px;
+                                }
+                            }
+                        }
+
+                        button {
+                            border: 1px solid var(--secondary-color);
+                            color: var(--secondary-color);
+                            background-color: white;
+                            height: 100%;
+                            width: 1.5rem;
+
+                            &:disabled {
+                                border: 1px solid lightgrey;
+                                color: lightgrey;
+
+                                &:hover {
+                                    background-color: white;
+                                    cursor: not-allowed;
+                                }
+                            }
+
+                            &:hover {
+                                background-color: var(
+                                    --secondary-color-lighter
+                                );
+                            }
+                        }
+                    }
+                }
+
+                .headerBtnContainer {
+                    .headerBtn {
+                        padding: 5px 032px;
+                        background-color: var(--secondary-color);
+                        color: white;
+                        border: none;
+                        font-size: 1.2rem;
+                        height: 100%;
+                        width: 100%;
+                        border-left: 2.2px solid #febb02;
+                        border-right: 2px solid #febb02;
+                        font-weight: 600;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 @media screen and (max-width: 1124px) {
-  .header {
-    .headerContainer {
-      .headerList {
-        padding: 1rem 2rem;
-        flex-wrap: wrap;
-      }
+    .header {
+        .headerContainer {
+            .headerList {
+                padding: 1rem 2rem;
+                flex-wrap: wrap;
+            }
 
-      .headerContent {
-        padding: 0rem 2rem;
-      }
+            .headerContent {
+                padding: 0rem 2rem;
+            }
 
-      .headerSearch {
-        .headerSearchContainer {
-          margin: 0rem 2rem;
+            .headerSearch {
+                .headerSearchContainer {
+                    margin: 0rem 2rem;
 
-          .headerSearchItem {
-            padding: 1rem;
-          }
+                    .headerSearchItem {
+                        padding: 1rem;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 @media screen and (max-width: 963px) {
-  .header {
-    .headerContainer {
-      .headerContent {
-        margin-bottom: 3rem;
-        // h2 {
-        //     font-size: 2.5rem;
-        // }
+    .header {
+        .headerContainer {
+            .headerContent {
+                margin-bottom: 3rem;
+                // h2 {
+                //     font-size: 2.5rem;
+                // }
 
-        p {
-          padding-left: 0px;
+                p {
+                    padding-left: 0px;
+                }
+
+                button {
+                    margin-left: 0px;
+                }
+            }
+
+            .headerList {
+                margin-bottom: 4rem;
+            }
+
+            .headerSearch {
+                height: auto;
+                position: unset;
+                margin-bottom: -1.8rem;
+
+                .headerSearchContainer {
+                    flex-wrap: wrap;
+                    gap: 4px;
+
+                    .headerBtnContainer {
+                        width: 100%;
+                        height: 50px;
+                    }
+                }
+            }
         }
-
-        button {
-          margin-left: 0px;
-        }
-      }
-
-      .headerList {
-        margin-bottom: 4rem;
-      }
-
-      .headerSearch {
-        height: auto;
-        position: unset;
-        margin-bottom: -1.8rem;
-
-        .headerSearchContainer {
-          flex-wrap: wrap;
-          gap: 4px;
-
-          .headerBtnContainer {
-            width: 100%;
-            height: 50px;
-          }
-        }
-      }
     }
-  }
 }
 
 @media screen and (max-width: 784px) {
-  .header {
-    .headerContainer {
-      .headerContent {
-        h2 {
-          font-size: 2.5rem;
-        }
+    .header {
+        .headerContainer {
+            .headerContent {
+                h2 {
+                    font-size: 2.5rem;
+                }
 
-        p {
-          width: 100%;
-          font-size: 1.2rem;
+                p {
+                    width: 100%;
+                    font-size: 1.2rem;
+                }
+            }
         }
-      }
     }
-  }
 }
 
 @media screen and (max-width: 440px) {
-  .header {
-    .headerContainer {
-      .headerContent {
-        margin-bottom: 4rem;
-        padding: 0rem 1rem;
+    .header {
+        .headerContainer {
+            .headerContent {
+                margin-bottom: 4rem;
+                padding: 0rem 1rem;
 
-        h2 {
-          font-size: 2.2rem;
+                h2 {
+                    font-size: 2.2rem;
+                }
+
+                p {
+                    width: 100%;
+                    font-size: 1.2rem;
+                    padding-left: 0px;
+                    font-size: 1rem;
+                }
+
+                button {
+                    margin-left: 0px;
+                    display: none;
+                }
+            }
+
+            .headerList {
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+                padding: 0rem 1rem;
+
+                .headerListItem {
+                    min-width: max-content;
+                }
+            }
+
+            .headerSearch {
+                .headerSearchContainer {
+                    margin: 0rem 1rem;
+                }
+            }
         }
-
-        p {
-          width: 100%;
-          font-size: 1.2rem;
-          padding-left: 0px;
-          font-size: 1rem;
-        }
-
-        button {
-          margin-left: 0px;
-          display: none;
-        }
-      }
-
-      .headerList {
-        flex-wrap: nowrap;
-        overflow-x: scroll;
-        padding: 0rem 1rem;
-
-        .headerListItem {
-          min-width: max-content;
-        }
-      }
-
-      .headerSearch {
-        .headerSearchContainer {
-          margin: 0rem 1rem;
-        }
-      }
     }
-  }
 }
