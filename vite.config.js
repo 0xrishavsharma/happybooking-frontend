@@ -1,5 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+export const domainName =
+	process.env.NODE_ENV === "production"
+		? "https://happybooking-backend.onrender.com"
+		: "http://localhost:8000";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -7,7 +11,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			"/api": {
-				target: "http://localhost:8800",
+				target: domainName,
 				changeOrigin: true,
 			},
 		},
