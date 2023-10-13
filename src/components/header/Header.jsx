@@ -77,7 +77,7 @@ const Header = ({ type }) => {
 				navigate("/hotels", {
 					state: { destination, dates, options, travelingForWork },
 				});
-				console.log("Location input ref: " + locationInputRef.current.value);
+				// console.log("Location input ref: " + locationInputRef.current.value);
 			}
 		} catch (error) {
 			console.log(error);
@@ -300,7 +300,6 @@ const Header = ({ type }) => {
 							onChange={(e) => setTravelingForWork(!travelingForWork)}
 							className="w-5 h-5 rounded-none cursor-pointer"
 						/>
-						{console.log(travelingForWork)}
 						<span className="text-sm">I am traveling for work</span>
 					</div>
 				</div>

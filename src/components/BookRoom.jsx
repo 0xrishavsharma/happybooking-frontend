@@ -2,13 +2,16 @@ import React, { useContext, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { SearchContext } from "../context/SearchContext";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 
-const BookRoom = ({ setOpenModal, hotelId }) => {
+const BookRoom = ({ setOpenModal, hotelId, setRoomBooked }) => {
 	const [selectedRooms, setSelectedRooms] = useState([]);
 	const { data, loading, error, reFetch } = useFetch(
 		`/api/hotels/room/${hotelId}`
 	);
 	const { dates } = useContext(SearchContext);
+	const { user } = useContext(AuthContext);
 
 	const handleRoomInput = (e) => {
 		const checked = e.target.checked;
@@ -48,22 +51,28 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 
 	const handleBookNow = async () => {
 		try {
-			await Promise.all(
+			const roomBookRes = await Promise.all(
 				selectedRooms.map(async (roomId) => {
 					const res = await axios.put(`/api/rooms/availability/${roomId}`, {
 						dates: allDates,
+						bookedBy: user._id,
 					});
 					return res.data;
-				}
-				)
+				})
 			);
+			console.log(roomBookRes);
+			setOpenModal(false);
+			setRoomBooked(true);
+			toast.success("Room booked successfully!");
 		} catch (err) {
 			console.log(err);
+			setRoomBooked(false);
 		}
 	};
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto  bg-[#0d0d0d96] outline-none focus:outline-none">
+			{/* <ToastContainer /> */}
 			<div className="relative w-full max-w-3xl mx-auto my-6">
 				{/*content*/}
 				<div className="relative flex mt-10 flex-col w-full bg-[#f2f2f2] border-0 rounded-lg shadow-lg outline-none focus:outline-none">
@@ -113,20 +122,33 @@ const BookRoom = ({ setOpenModal, hotelId }) => {
 												₹{room.price}
 											</span>
 										</div>
-										<div className="flex flex-wrap gap-6 ">
+										<div className="flex flex-wrap gap-6">
 											{room.roomNumbers.map((roomNumber) => {
 												return (
 													<div
-														className="flex items-center gap-2"
+														className={
+															!getAvailableRooms(roomNumber)
+																? "flex items-center gap-2 cursor-not-allowed"
+																: " flex items-center gap-2"
+														}
 														key={roomNumber._id}>
 														<input
-															className="text-lg"
+															className={
+																!getAvailableRooms(roomNumber)
+																	? "text-lg text-gray-400 cursor-not-allowed"
+																	: "text-lg text-black"
+															}
 															type="checkbox"
 															disabled={!getAvailableRooms(roomNumber)}
 															value={roomNumber._id}
 															onChange={handleRoomInput}
 														/>
-														<span className="text-lg font-semibold">
+														<span
+															className={
+																!getAvailableRooms(roomNumber)
+																	? "text-lg font-semibold text-gray-400 cursor-not-allowed "
+																	: "text-lg font-semibold"
+															}>
 															{roomNumber.number}
 														</span>
 													</div>

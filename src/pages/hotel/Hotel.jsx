@@ -16,11 +16,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import BookRoom from "../../components/BookRoom";
 import { AuthContext } from "../../context/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
 
 const Hotel = () => {
 	const [slideNumber, setSlideNumber] = useState(0);
 	const [open, setOpen] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
+	const [roomBooked, setRoomBooked] = useState(false);
 	const navigate = useNavigate();
 
 	const hotelId = useLocation().pathname.split("/")[2];
@@ -95,6 +97,7 @@ const Hotel = () => {
 				className={`flex flex-col items-center select-none ${
 					open ? "mt-0" : "mt-12"
 				}`}>
+				<ToastContainer />
 				{open && (
 					<div className="sticky top-0 left-0 w-screen h-screen z-[999] py-12  max-w-full bg-[rgba(0,0,0,0.42)]">
 						<FontAwesomeIcon
@@ -201,6 +204,7 @@ const Hotel = () => {
 								consectetur adipisicing elit.{" "}
 							</p>
 							<h3 className="my-5 text-2xl font-extrabold">
+								{console.log("Days", days)}
 								<b>
 									{(days * data?.cheapestPrice * options?.room).toLocaleString(
 										"en-IN",
@@ -210,6 +214,14 @@ const Hotel = () => {
 											minimumFractionDigits: 0,
 											maximumFractionDigits: 0,
 										}
+									)}
+									{console.log(
+										(days * data?.cheapestPrice).toLocaleString("en-IN", {
+											style: "currency",
+											currency: "INR",
+											minimumFractionDigits: 0,
+											maximumFractionDigits: 0,
+										})
 									)}
 								</b>
 								({days} nights)
@@ -230,6 +242,8 @@ const Hotel = () => {
 					openModal={openModal}
 					setOpenModal={setOpenModal}
 					hotelId={hotelId}
+					roomBooked={roomBooked}
+					setRoomBooked={setRoomBooked}
 				/>
 			)}
 		</div>

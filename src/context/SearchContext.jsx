@@ -3,13 +3,11 @@ import { createContext, useEffect, useReducer } from "react";
 const INITIAL_STATE = {
 	destination: JSON.parse(localStorage.getItem("destination")) || null,
 	dates: JSON.parse(localStorage.getItem("dates")) || [],
-	options: JSON.parse(
-		localStorage.getItem("options") || {
-			adults: undefined,
-			children: undefined,
-			room: undefined,
-		}
-	),
+	options: JSON.parse(localStorage.getItem("options")) || {
+		adults: undefined,
+		children: undefined,
+		room: undefined,
+	},
 	travelingForWork:
 		JSON.parse(localStorage.getItem("travelingForWork")) || false,
 	priceRange: JSON.parse(localStorage.getItem("priceRange")) || [0, 10000],
