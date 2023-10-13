@@ -4,7 +4,7 @@ import "./featuredLocations.scss";
 
 const Featured = ({ cityList }) => {
 	const { data, loading, error } = useFetch(
-		"/api/hotels/countByCity?cities=Chamba,Dalhousie,Dharamshala,Kaza,Kasol,Malana,Manali,Pangi,Shimla,Lahaul-Spiti"
+		"https://happybooking-backend.onrender.com/api/hotels/countByCity?cities=Chamba,Dalhousie,Dharamshala,Kaza,Kasol,Malana,Manali,Pangi,Shimla,Lahaul-Spiti"
 	);
 	return (
 		<div className="flex justify-center w-full max-w-[1084px]">

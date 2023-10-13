@@ -27,7 +27,7 @@ const Hotel = () => {
 
 	const hotelId = useLocation().pathname.split("/")[2];
 	const { data, loading, error, reFetch } = useFetch(
-		`/api/hotels/find/${hotelId}`
+		`https://happybooking-backend.onrender.com/api/hotels/find/${hotelId}`
 	);
 
 	const { user } = useContext(AuthContext);
@@ -37,7 +37,7 @@ const Hotel = () => {
 	function dayDifference(date1, date2) {
 		const timeDiff = Math.abs(
 			new Date(date2.toString())?.getTime() -
-				new Date(date1.toString())?.getTime()
+			new Date(date1.toString())?.getTime()
 		);
 		const diffDays = Math.ceil(timeDiff / MILLISECONDS_IN_DAY);
 		return diffDays;
@@ -94,9 +94,8 @@ const Hotel = () => {
 			<Navbar />
 			<Header type="hotels" />
 			<div
-				className={`flex flex-col items-center select-none ${
-					open ? "mt-0" : "mt-12"
-				}`}>
+				className={`flex flex-col items-center select-none ${open ? "mt-0" : "mt-12"
+					}`}>
 				<ToastContainer />
 				{open && (
 					<div className="sticky top-0 left-0 w-screen h-screen z-[999] py-12  max-w-full bg-[rgba(0,0,0,0.42)]">
@@ -162,33 +161,33 @@ const Hotel = () => {
 					<div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-2">
 						{loading
 							? photos.map((city, i) => {
+								return (
+									<div
+										key={i + 1}
+										className="flex justify-center items-center w-auto min-h-[280px] bg-gray-200 animate-pulse rounded-md shadow-sm">
+										{/* Loading... */}
+									</div>
+								);
+							})
+							: (data?.photos?.length > 0 ? data?.photos : photos).map(
+								(photo, i) => {
 									return (
 										<div
 											key={i + 1}
-											className="flex justify-center items-center w-auto min-h-[280px] bg-gray-200 animate-pulse rounded-md shadow-sm">
-											{/* Loading... */}
+											className="max-h-[280px] min-h-[280px] cursor-pointer"
+											onClick={() => {
+												setSlideNumber(i), setOpen(true);
+											}}>
+											<img
+												src={photo.img}
+												className="object-cover w-full h-full"
+												alt=""
+												srcSet=""
+											/>
 										</div>
 									);
-							  })
-							: (data?.photos?.length > 0 ? data?.photos : photos).map(
-									(photo, i) => {
-										return (
-											<div
-												key={i + 1}
-												className="max-h-[280px] min-h-[280px] cursor-pointer"
-												onClick={() => {
-													setSlideNumber(i), setOpen(true);
-												}}>
-												<img
-													src={photo.img}
-													className="object-cover w-full h-full"
-													alt=""
-													srcSet=""
-												/>
-											</div>
-										);
-									}
-							  )}
+								}
+							)}
 					</div>
 					<div className="flex justify-center gap-8 p-3">
 						<div className="flex-[3] flex flex-col gap-5">

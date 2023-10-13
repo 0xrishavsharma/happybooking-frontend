@@ -8,9 +8,10 @@ import PropertiesList from '../../components/propertiesList/PropertiesList';
 import FeaturedProperties from '../../components/featuredProperties/FeaturedProperties';
 import MailList from '../../components/mailList/MailList';
 import Footer from '../../components/footer/Footer';
+import { domainName } from '../../../config';
 
 const Home = () => {
-
+  console.log("Domain name: " + domainName)
   return (
     <div className='home'>
       <Navbar />

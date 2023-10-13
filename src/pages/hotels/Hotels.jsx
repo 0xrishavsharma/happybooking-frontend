@@ -39,8 +39,7 @@ const Hotels = () => {
 	const formattedDestination =
 		destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
 	const { data, error, loading, reFetch } = useFetch(
-		`/api/hotels?city=${formattedDestination}&min=${minPrice || 0}&max=${
-			maxPrice || 9999
+		`https://happybooking-backend.onrender.com/api/hotels?city=${formattedDestination}&min=${minPrice || 0}&max=${maxPrice || 9999
 		}`
 	);
 
@@ -209,10 +208,9 @@ const Hotels = () => {
 						<div className="hrHeading">
 							<h2>
 								{formattedDestination &&
-									`${formattedDestination} : ${data.length} ${
-										data.length > 1 || data.length === 0
-											? "properties"
-											: "property"
+									`${formattedDestination} : ${data.length} ${data.length > 1 || data.length === 0
+										? "properties"
+										: "property"
 									} found`}
 							</h2>
 							<div className="mapBtn">

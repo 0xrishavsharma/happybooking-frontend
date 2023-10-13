@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 const BookRoom = ({ setOpenModal, hotelId, setRoomBooked }) => {
 	const [selectedRooms, setSelectedRooms] = useState([]);
 	const { data, loading, error, reFetch } = useFetch(
-		`/api/hotels/room/${hotelId}`
+		`https://happybooking-backend.onrender.com/api/hotels/room/${hotelId}`
 	);
 	const { dates } = useContext(SearchContext);
 	const { user } = useContext(AuthContext);
@@ -53,7 +53,7 @@ const BookRoom = ({ setOpenModal, hotelId, setRoomBooked }) => {
 		try {
 			const roomBookRes = await Promise.all(
 				selectedRooms.map(async (roomId) => {
-					const res = await axios.put(`/api/rooms/availability/${roomId}`, {
+					const res = await axios.put(`https://happybooking-backend.onrender.com/api/rooms/availability/${roomId}`, {
 						dates: allDates,
 						bookedBy: user._id,
 					});

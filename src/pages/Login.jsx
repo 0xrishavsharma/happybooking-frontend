@@ -16,7 +16,7 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			dispatch({ type: "LOGIN_START" });
-			const res = await axios.post("/api/auth/login", credentials);
+			const res = await axios.post("https://happybooking-backend.onrender.com/api/auth/login", credentials);
 			dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
 			console.log(res);
 			navigate("/");

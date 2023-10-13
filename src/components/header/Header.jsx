@@ -15,7 +15,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns/esm";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -153,7 +153,10 @@ const Header = ({ type }) => {
 										of 10% when you create your account on HappyBooking.com
 									</p>
 								)}
-								{!user && <button className="headerBtn">Register</button>}
+								{!user && <Link to="/login">
+									<button className="headerBtn">Register</button>
+								</Link>
+								}
 							</div>
 							<div className="headerSearch">
 								<div className="headerSearchContainer">
